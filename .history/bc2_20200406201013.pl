@@ -86,7 +86,6 @@ adjudicataria(7, "Accenture Tecnology Solutions - Solucoes Informaticas Integrad
 adjudicataria(8, "Beltrao Coelho, Lda", 504654748, "Portugal").
 adjudicataria(9, "Batist Medical Portugal Unipessoal Lda", 508592909, "Portugal").
 adjudicataria(10, "EDP", 503504564, Portugal).
-adjudicataria(11, "SGald Automotive", 503188620, "Portugal").
 
 % ------- Conhecimento Perfeito Negativo
 -adjudicataria(13, "CGITI Portugal", 502605731, "Portugal").

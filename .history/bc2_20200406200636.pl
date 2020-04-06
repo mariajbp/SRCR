@@ -5,7 +5,7 @@ contrato(600018709,502381973, "Aquisicao de servicos", "Ajuste Direto", "Aquisic
 contrato(506696464,809589087, "Aquisicao de serviços", "Ajuste Direto", "Reparacao e Conservacao de Escolas - Fornecimento de aluminos", 2800, "30 dias", "Vila Flor", "16-02-2020").
 contrato(506901173,515204463, "Aquisicao de servicos", "Ajuste Direto", "Obras de Demolicao e Reposicao da Legalidade De Anexo", 4694.60, "25 dias", "Braga", "11-03-2020").
 contrato(502011378,980474710, "Aquisicao de bens moveis", "Concurso publico", "Aquisicao de um microscopio 2Photon", 320000, "105 dias", "Braga", '31-03-2020').
-contrato(680047360,500853975, "Aquisicao de bens moveis", "Concurso publico", "Aquisicao de cafe por lotes para os anos de 2020 e 2021", 157275, "353 dias", "Braga", "13-01-2020").
+contrato(680047360,500853975, "Aquisicao de bens moveis", "Concurso publico", "Aquisicao de Cafe por lotes para os anos de 2020 e 2021", 157275, "353 dias", "Braga", "13-01-2020").
 contrato(501413197,504099388, "Locacao de bens moveis", "Concurso publico", "Aquisicao de nos de computacao (servidores) para cloud interna", 210000, "30 dias", "Porto", "16-03-2020").
 contrato(600084779,502443855, "Aquisicao de servicos", "Consulta Previa", "Aquisicao de servicos de desenvolvimento aplicacional dos sistemas de informacao da Autoridade Tributaria e Aduaneira", 201400, "210 dias", "19-02-2020").
 contrato(600006638,504654748, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de 2 equipamentos multifuncionais", 10980, "30 dias", "12-03-2020").
@@ -46,8 +46,7 @@ adjudicante(3, "Municipio de Braga", 506901173, "Braga").
 adjudicante(5, "Servicos de Accao Social da Universidade do Minho", 680047360, "Braga").
 adjudicante(6, "Autoridade Tributaria e Aduaneira", 600084779, "Lisboa").
 adjudicante(7, "Centro Hospitalar Universitario de Lisboa Norte", 508481287, "Lisboa").
-adjudicante(10, "Gestao Ambiental e de Residuos", 506346773, "Evora").
-adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
+adjudicante(10, "Gesamb - Gestão Ambiental e de Resíduos", 506346773, "Évora").
 
 % ------- Conhecimento Perfeito Negativo
 -adjudicante(9, "Municipio de Braganca", 501128840, "Braganca").
@@ -62,7 +61,7 @@ excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_desco
 
 %Não se sabe se a morada da entidade é Braga ou Guimarães
 excecao(adjudicante(4, "Universidade do Minho", 502011378, "Braga")).
-excecao(adjudicante(4, "Universidade do Minho", 502011378, "Guimaraes")).
+excecao(adjudicante(4, "Universidade do Minho", 502011378, "Guimarães")).
 
 % ------- Conhecimento Imperfeito Interdito
 %É impossivel saber a nome da entidade
@@ -86,7 +85,6 @@ adjudicataria(7, "Accenture Tecnology Solutions - Solucoes Informaticas Integrad
 adjudicataria(8, "Beltrao Coelho, Lda", 504654748, "Portugal").
 adjudicataria(9, "Batist Medical Portugal Unipessoal Lda", 508592909, "Portugal").
 adjudicataria(10, "EDP", 503504564, Portugal).
-adjudicataria(11, "SGald Automotive", 503188620, "Portugal").
 
 % ------- Conhecimento Perfeito Negativo
 -adjudicataria(13, "CGITI Portugal", 502605731, "Portugal").

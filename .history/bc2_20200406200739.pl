@@ -46,8 +46,7 @@ adjudicante(3, "Municipio de Braga", 506901173, "Braga").
 adjudicante(5, "Servicos de Accao Social da Universidade do Minho", 680047360, "Braga").
 adjudicante(6, "Autoridade Tributaria e Aduaneira", 600084779, "Lisboa").
 adjudicante(7, "Centro Hospitalar Universitario de Lisboa Norte", 508481287, "Lisboa").
-adjudicante(10, "Gestao Ambiental e de Residuos", 506346773, "Evora").
-adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
+adjudicante(10, "Gesamb - Gestão Ambiental e de Resíduos", 506346773, "Évora").
 
 % ------- Conhecimento Perfeito Negativo
 -adjudicante(9, "Municipio de Braganca", 501128840, "Braganca").
@@ -86,7 +85,6 @@ adjudicataria(7, "Accenture Tecnology Solutions - Solucoes Informaticas Integrad
 adjudicataria(8, "Beltrao Coelho, Lda", 504654748, "Portugal").
 adjudicataria(9, "Batist Medical Portugal Unipessoal Lda", 508592909, "Portugal").
 adjudicataria(10, "EDP", 503504564, Portugal).
-adjudicataria(11, "SGald Automotive", 503188620, "Portugal").
 
 % ------- Conhecimento Perfeito Negativo
 -adjudicataria(13, "CGITI Portugal", 502605731, "Portugal").

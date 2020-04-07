@@ -42,24 +42,17 @@
 
 % Garantir que o id da adjudicataria associado ao contrato existe
 +contrato(_,IdAda,_,_,_,_,_,_,_) :: (solucoes(IdAda, contrato(_,IdAda,_,_,_,_,_,_,_), R),
-										      comprimento(R, 1)).	 
+										comprimento(R, 1)).	 
 										
 %Regra dos 3 anos válida para todos os contratos
 %solucoes((Aa,Ar,Vl,Dt), contrato(Aa,Ar,_,_,_,Vl,_,_,Dt),L).
-menos3Anos(Dt,Data):- split_string(Dt,"-", SubStrDt), split_string(Data,"-", SubStrData),
-					   nth(2, SubStrDt, YDt), nth(2, SubStrData, YData),
-					   number_codes(NYDt, YDt), number_codes(NYData, YData),
-					   SubY is YData-YDt, SubY =< 3.
-
+menos3Anos(Dt,Data):- split_string(Dt,"-", SubStrDt),split_string(Data,"-", SubStrData),
+					nth(2, SubStrDt, YDt),nth(2, SubStrData, YData),
+					number_codes(NYDt, YDt),number_codes(NYData, YData),
+					SubY is YData-YDt, SubY=<3.
 sumVals([],0).
-sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).	
+sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).											
 
-
-% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
-+contrato(_,_,_,_,_,V,_,_,_) :: valorValido(V).
-
-% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
-+(-contrato(_,_,_,_,_,V,_,_,_)) :: valorValido(V).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante

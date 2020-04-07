@@ -52,14 +52,7 @@ menos3Anos(Dt,Data):- split_string(Dt,"-", SubStrDt), split_string(Data,"-", Sub
 					   SubY is YData-YDt, SubY =< 3.
 
 sumVals([],0).
-sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).	
-
-
-% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
-+contrato(_,_,_,_,_,V,_,_,_) :: valorValido(V).
-
-% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
-+(-contrato(_,_,_,_,_,V,_,_,_)) :: valorValido(V).
+sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).											
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante

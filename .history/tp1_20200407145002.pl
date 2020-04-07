@@ -17,5 +17,4 @@
 
 :- include('bc.pl').
 :- include('aux.pl').
-:- include('evinvolucao.pl').
 :- include('invariantes.pl').

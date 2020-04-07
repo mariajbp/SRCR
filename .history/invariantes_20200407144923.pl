@@ -58,7 +58,7 @@ sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
 +contrato(_,_,_,_,_,V,_,_,_) :: valorValido(V).
 
-% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
+% Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
 +(-contrato(_,_,_,_,_,V,_,_,_)) :: valorValido(V).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -

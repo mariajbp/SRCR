@@ -38,9 +38,9 @@ teste([I|L]) :- I, teste(L).
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 
 % Nif válido
-nifValido(Nif) :- Nif >= 100000000, Nif =< 999999999.
+nifValido(Nif) :- (Nif >= 100000000), Nif =< 999999999.
 
 % Valor válido (>= 0)
-valorValido(V) :- V >= 0
+valorValido(V) :- V >= 0.
 
 

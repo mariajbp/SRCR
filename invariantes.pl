@@ -45,14 +45,18 @@
 										      comprimento(R, 1)).	 
 										
 %Regra dos 3 anos válida para todos os contratos
++contrato(IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes((Vl,Dt), contrato(IdAd,IdAda,_,_,_,Vl,_,_,menos3Anos(Dt,Data)),L),
+                                                                                sumVals([(-Val,Data)|L],Ret),
+                                                                                Ret<75000).
 %solucoes((Aa,Ar,Vl,Dt), contrato(Aa,Ar,_,_,_,Vl,_,_,Dt),L).
 menos3Anos(Dt,Data):- split_string(Dt,"-", SubStrDt), split_string(Data,"-", SubStrData),
 					   nth(2, SubStrDt, YDt), nth(2, SubStrData, YData),
 					   number_codes(NYDt, YDt), number_codes(NYData, YData),
 					   SubY is YData-YDt, SubY =< 3.
 
-sumVals([],0).
-sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).	
+sumVals([(V,Dt)],V).
+sumVals([(Vl,Dt)|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
+%sumVals([(1,1),(1,2),(1,1)],R)	
 
 
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
@@ -68,9 +72,6 @@ sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1),
 									  (solucoes(Nif, adjudicataria(_,Nif,_,_),R2), comprimento(R2,1))).
 
-%Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito negativo
-+(-adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, -adjudicante(IdAd,_,_,_),R), comprimento(R,1),
-									  (solucoes(Nif, adjudicataria(_,Nif,_,_),R2), comprimento(R2,1))).									
 
 % Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,Nif,Morada), R), 
@@ -106,4 +107,4 @@ sumVals([(Vl,Dt)|T],Ret):- Ret2 is Ret+Vl, sumVals(T,Ret2).
                               comprimento(R, 0)).
 
 % Garantir que o nif da adjudicataria é válido
-+adjudicataria(_,_,Nif,_) :: nifValido(Nif).
++adjudicataria(_,_,Nif,_) :: (nifValido(Nif)).

@@ -1,5 +1,4 @@
 %Extensao do predicato Contrato: IdAd, IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Valor, Prazo, Local, Data -> {V,F,D}
-
 % ------- Conhecimento Perfeito Positivo
 contrato(600018709,502381973, "Aquisicao de servicos", "Ajuste Direto", "Aquisicao de servicos de acesso da Base de Dados Juridicos", 4000, "195 dias", "Lisboa", "19-03-2020").
 contrato(506696464,809589087, "Aquisicao de serviços", "Ajuste Direto", "Reparacao e Conservacao de Escolas - Fornecimento de aluminos", 2800, "30 dias", "Vila Flor", "16-02-2020").
@@ -44,7 +43,6 @@ adjudicante(1, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa").
 adjudicante(2, "Municipio de Vila Flor", 506696464, "Vila Flor").
 adjudicante(3, "Municipio de Braga", 506901173, "Braga").
 adjudicante(5, "Servicos de Accao Social da Universidade do Minho", 680047360, "Braga").
-adjudicante(6, "Autoridade Tributaria e Aduaneira", 600084779, "Lisboa").
 adjudicante(7, "Centro Hospitalar Universitario de Lisboa Norte", 508481287, "Lisboa").
 adjudicante(10, "Gestao Ambiental e de Residuos", 506346773, "Evora").
 adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
@@ -115,3 +113,7 @@ nulointerdito(unknown_address).
 +adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
                                        adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, unknown_address),
                                        nao(nulointerdito(unknown_address)), R), comprimento(R,0)).
+
+%-------------------- Predicados de Id
+idAdjud(12).
+idAdjudicata(13).

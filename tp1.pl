@@ -11,6 +11,8 @@
 :- dynamic adjudicante/4.
 :- dynamic adjudicataria/4.
 :- dynamic contrato/9.
+:- dynamic idAdjud/1.
+:- dynamic idAdjudicata/1.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Carregar predicados do ficheiro no qual é guardado o estado

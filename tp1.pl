@@ -13,6 +13,7 @@
 :- dynamic contrato/9.
 :- dynamic idAdjud/1.
 :- dynamic idAdjudicata/1.
+:- dynamic excecao/1.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Carregar predicados do ficheiro no qual é guardado o estado

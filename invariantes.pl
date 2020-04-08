@@ -19,58 +19,48 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Contrato
-
-% Garantir que cada contrato só tem 1 dos 3 tipos de procedimentos possiveis
-+contrato(IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :: (contrato(IdAd,IdAda,TContrato,ajuste_direto,D,V,P,L,DT);
-                                                     		contrato(IdAd,IdAda,TContrato,consulta_previa,D,V,P,L,DT);
-                                                     		contrato(IdAd,IdAda,TContrato,concurso_publico,D,V,P,L,DT)).
+% 
+% Garantir que cada contrato só tem 1 dos 3 tipos de procedimentos possiveis + 1 desconhecido
++contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :: (contrato(IdC,IdAd,IdAda,TContrato,ajuste_direto,D,V,P,L,DT);
+															 contrato(IdC,IdAd,IdAda,TContrato,consulta_previa,D,V,P,L,DT);
+															 contrato(IdC,IdAd,IdAda,TContrato,tP_desconhecido,D,V,P,L,DT);
+                                                     		contrato(IdC,IdAd,IdAda,TContrato,concurso_publico,D,V,P,L,DT)).
 
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
-+contrato(_,_,_,ajuste_direto,_,V,_,_,_) :: (V =< 5000).
++contrato(IdC,_,_,_,ajuste_direto,_,V,_,_,_) :: (V =< 5000).
 
-%Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços
-+contrato(_,_,TContrato,ajuste_direto,_,_,_,_,_) :: (+contrato(_,_,aquisicao,ajuste_direto,_,_,_,_,_);
-  													 +contrato(_,_,locacao_bens_moveis,ajuste_direto,_,_,_,_,_);
-   													 +contrato(_,_,aquisicao_servicos,ajuste_direto,_,_,_,_,_)).
+%Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
++contrato(IdC,_,_,TContrato,ajuste_direto,_,_,_,_,_) :: (contrato(IdC,_,_,aquisicao,ajuste_direto,_,_,_,_,_);
+													   contrato(IdC,_,_,locacao_bens_moveis,ajuste_direto,_,_,_,_,_);
+													   contrato(IdC,_,_,tC_desconhecido,ajuste_direto,_,_,_,_,_);
+   													 contrato(IdC,_,_,aquisicao_servicos,ajuste_direto,_,_,_,_,_)).
 
 % Prazo de vigencia ate 1 ano
-+contrato(_,_,_,ajustedireto,_,_,Prazo,_,_) :: (Prazo =< 365).
-
-% Garantir que o id do adjudicante associado ao contrato existe
-+contrato(IdAd,_,_,_,_,_,_,_,_) :: (solucoes(IdAd, contrato(IdAd,_,_,_,_,_,_,_,_), R),
-                           					 comprimento(R, 1)).
-
-% Garantir que o id da adjudicataria associado ao contrato existe
-+contrato(_,IdAda,_,_,_,_,_,_,_) :: (solucoes(IdAda, contrato(_,IdAda,_,_,_,_,_,_,_), R),
-										      comprimento(R, 1)).	 
++contrato(IdC,_,_,_,ajustedireto,_,_,Prazo,_,_) :: Prazo=<365.
 										
 %Regra dos 3 anos válida para todos os contratos
-+contrato(IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes((Vl,Dt), contrato(IdAd,IdAda,_,_,_,Vl,_,_,menos3Anos(Dt,Data)),L),
-                                                                                sumVals([(-Val,Data)|L],Ret),
++contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes(Vl, contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,menos3Anos(Dt,Data)),L),
+                                                                                sumVals([-Val|L],Ret),
                                                                                 Ret<75000).
-%solucoes((Aa,Ar,Vl,Dt), contrato(Aa,Ar,_,_,_,Vl,_,_,Dt),L).
-menos3Anos(Dt,Data):- split_string(Dt,"-", SubStrDt), split_string(Data,"-", SubStrData),
-					   nth(2, SubStrDt, YDt), nth(2, SubStrData, YData),
-					   number_codes(NYDt, YDt), number_codes(NYData, YData),
-					   SubY is YData-YDt, SubY =< 3.
 
-sumVals([(V,Dt)],V).
-sumVals([(Vl,Dt)|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
-%sumVals([(1,1),(1,2),(1,1)],R)	
+menos3Anos(data(_,_,NYDt),data(_,_,NYData)):-SubY is NYData-NYDt, SubY =< 3.
 
+sumVals([V],V).
+sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
-+contrato(_,_,_,_,_,V,_,_,_) :: valorValido(V).
++contrato(IdC,_,_,_,_,_,V,_,_,_) :: valorValido(V).
+
 
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
-+(-contrato(_,_,_,_,_,V,_,_,_)) :: valorValido(V).
++(-contrato(IdC,_,_,_,_,_,V,_,_,_)) :: valorValido(V).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante
 
 %Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1),
-									  (solucoes(Nif, adjudicataria(_,Nif,_,_),R2), comprimento(R2,1))).
+									  (solucoes(Nif, adjudicante(_,_,Nif,_),R2), comprimento(R2,1))).
 
 
 % Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo
@@ -82,7 +72,7 @@ sumVals([(Vl,Dt)|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 									   comprimento(R,1)).									
 
 % Garantir que não é possível remover uma entidade adjudicataria com um contrato 
--adjudicante(_,_,Nif,_) :: (solucoes(Nif), contrato(Nif,_,_,_,_,_,_,_,_), R,
+-adjudicante(_,_,Nif,_) :: (solucoes(Nif), contrato(IdC,Nif,_,_,_,_,_,_,_,_), R,
                             comprimento(R, 0)).
 						
 % Garantir que o nif do adjudicante é válido para conhecimento positivo
@@ -103,7 +93,7 @@ sumVals([(Vl,Dt)|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 									     comprimento(R,1)).
 
 % Garantir que não é possível remover uma entidade adjudicataria com um contrato
--adjudicataria(_,_,Nif,_) :: (solucoes(Nif), contrato(_,Nif,_,_,_,_,_,_,_), R,
+-adjudicataria(_,_,Nif,_) :: (solucoes(Nif), contrato(IdC,_,Nif,_,_,_,_,_,_,_), R,
                               comprimento(R, 0)).
 
 % Garantir que o nif da adjudicataria é válido

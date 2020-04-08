@@ -10,11 +10,9 @@ nao(Q).
 % Extensao do predicado soluções: X,XS,R -> {V,F}
 
 % Encontra todas as soluções
-solucoes(X, XS, R) :- XS, assert(tmp(X)), fail.
-solucoes(X, XS, R) :- solucoesAux([], R).
+solucoes(X, XS, R) :- findall(X, XS, R).
 
-solucoesAux(L, R) :- retract(tmp(X)), !, solucoesAux([X|L], R).
-solucoesAux(R, R).
+
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado comprimento: X,R -> {V,F}

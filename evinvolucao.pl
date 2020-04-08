@@ -113,12 +113,27 @@ evolucao(adjudicataria(IdAd,Nome,Nif,Morada_desconhecida), adjudicataria, incert
 % Evolução de conhecimento imperfeito impreciso
 
 % Insere conhecimento imperfeito impreciso na base de conhecimento de qualquer fonte de conhecimento
-evolucao(T, impreciso) :- solucoes(Inv, +(excecao(T)) :: Inv, Lint),
+evolucao(T, impreciso) :- solucoes(Inv, +(excecao(T)) :: Inv, Linv),
                           insercao(excecao(T)),
                           teste(Linv).
 
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),contrato, impreciso, valor, LimiteInferior, LimiteSuperior) :-
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,LimiteInferior,P,L,DT),impreciso),
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,LimiteSuperior,P,L,DT),impreciso),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT) :-
+        Valor >= LimiteInferior, Valor =< LimiteSuperior)).
 
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),contrato, impreciso, prazo, LimiteInferior, LimiteSuperior) :-
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,LimiteInferior,L,DT),impreciso),
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,LimiteSuperior,DT),impreciso),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT) :-
+        P >= LimiteInferior, P =< LimiteSuperior)).
 
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M,A)),contrato, impreciso, data, data(Di,Mi,Ai), data(Ds,Ms,As)) :-
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(Di,Mi,Ai)),impreciso),
+    evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(Ds,Ms,As)),impreciso),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT) :-
+        ((A > Ai);(A==Ai,(M>Mi;(M==Mi,D>=Di)))),((A < As);(A==As,(M<Ms;(M==Ms,D=<Ds)))))).
 
 
 

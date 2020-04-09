@@ -27,13 +27,13 @@ excecao(contrato(11,600086992, 503188620, "Locacao de bens moveis", "Concurso Pu
 % ------- Conhecimento Imperfeito Interdito
 
 %É impossivel saber o valor do contrato
-contrato(12,508481287,508592909, "Aquisicao de bens moveis", "consulta Previa", "Aquisicao de seringas", valor_desconhecido, 352, data(14,01,2020)).
-excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(contrato(Id,IdA,IdAda,Tc,TP,Desc,valor_desconhecido,Pr,Local,Data)).
-nulointerdito(valor_desconhecido).
+contrato(12,508481287,508592909, "Aquisicao de bens moveis", "consulta Previa", "Aquisicao de seringas", valorInterdito, 352, data(14,01,2020)).
+excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(contrato(Id,IdA,IdAda,Tc,TP,Desc,valorInterdito,Pr,Local,Data)).
+
 
 +contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),
-                                                      contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valor_desconhecido, 352, data(14,01,2020)),
-                                                      nao(nulointerdito(valor_desconhecido)),R, comprimento(R,0))).
+                                                      contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valorInterdito, 352, data(14,01,2020)),
+                                                      nao(nulointerdito(valorInterdito)),R, comprimento(R,0))).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicante: IdAd, Nome, NIF, Morada -> {V,F,D}
@@ -64,13 +64,12 @@ excecao(adjudicante(4, "Universidade do Minho", 502011378, "Guimaraes")).
 
 % ------- Conhecimento Imperfeito Interdito
 %É impossivel saber a nome da entidade
-adjudicante(6, entidade_desconhecida, 501413197, "Porto").
-excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicataria(Id,entidade_desconhecida,Nif,Morada).
-nulointerdito(entidade_desconhecida).
+adjudicante(6, nomeInterdito, 501413197, "Porto").
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nomeInterdito,Nif,Morada).
 
 +adjudicante(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
-                                     (adjudicante(6,entidade_desconhecida, 501413197, "Porto"),
-                                     nao(nulointerdito(entidade_desconhecida))), R), comprimento(R,0)). 
+                                     (adjudicante(6,nomeInterdito, 501413197, "Porto"),
+                                     nao(nulointerdito(nomeInterdito))), R), comprimento(R,0)). 
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -106,14 +105,15 @@ excecao(adjudicataria(2, "Carlos Manuel Pires", 809589087, "Mirandela")).
 % ------- Conhecimento Imperfeito Interdito
 
 %É impossivel saber a morada da entidade
-adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, unknown_address).
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,unknown_address).
-nulointerdito(unknown_address).
+adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, moradaInterdita).
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,moradaInterdita).
 
 +adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
-                                       adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, unknown_address),
-                                       nao(nulointerdito(unknown_address)), R), comprimento(R,0)).
+                                       adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, moradaInterdita),
+                                       nao(nulointerdito(moradaInterdita)), R), comprimento(R,0)).
 
-% -------  Predicados de Id
-idAdjud(12).
-idAdjudicata(13).
+nulointerdito(moradaInterdita).
+nulointerdito(valorInterdito).
+nulointerdito(dataInterdita).
+nulointerdito(prazoInterdito).
+nulointerdito(nomeInterdito).

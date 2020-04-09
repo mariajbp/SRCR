@@ -28,24 +28,17 @@
 
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
 +contrato(IdC,_,_,_,ajuste_direto,_,V,_,_,_) :: (V =< 5000).
-+excecao(contrato(IdC,_,_,_,ajuste_direto,_,V,_,_,_)) :: (V =< 5000).
 %Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
 +contrato(IdC,_,_,TContrato,ajuste_direto,_,_,_,_,_) :: (contrato(IdC,_,_,aquisicao,ajuste_direto,_,_,_,_,_);
 													   contrato(IdC,_,_,locacao_bens_moveis,ajuste_direto,_,_,_,_,_);
 													   contrato(IdC,_,_,tC_desconhecido,ajuste_direto,_,_,_,_,_);
    													 contrato(IdC,_,_,aquisicao_servicos,ajuste_direto,_,_,_,_,_)).
 
-+excecao(contrato(IdC,_,_,TContrato,ajuste_direto,_,_,_,_,_)) :: (contrato(IdC,_,_,aquisicao,ajuste_direto,_,_,_,_,_);
-																contrato(IdC,_,_,locacao_bens_moveis,ajuste_direto,_,_,_,_,_);
-																contrato(IdC,_,_,tC_desconhecido,ajuste_direto,_,_,_,_,_);
-																contrato(IdC,_,_,aquisicao_servicos,ajuste_direto,_,_,_,_,_)).
-
 % Prazo de vigencia ate 1 ano
 +contrato(IdC,_,_,_,ajustedireto,_,_,Prazo,_,_) :: Prazo=<365.
-+excecao(contrato(IdC,_,_,_,ajustedireto,_,_,Prazo,_,_)) :: Prazo=<365.
 										
 %Regra dos 3 anos válida para todos os contratos
-+contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes(Vl, contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,menos3Anos(Dt,Data)),L),
++contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),(Vl =\= -1),menos3Anos(Dt,Data)),L),
                                                                                 sumVals([-Val|L],Ret),
                                                                                 Ret<75000).
 

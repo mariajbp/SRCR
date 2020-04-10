@@ -32,8 +32,8 @@ excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(contrat
 
 
 +contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),
-                                                      contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valorInterdito, 352, data(14,01,2020)),
-                                                      nao(nulointerdito(valorInterdito)),R, comprimento(R,0))).
+                                                         contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valorInterdito, 352, data(14,01,2020)),
+                                                         nao(nulointerdito(valorInterdito)),R, comprimento(R,0))).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicante: IdAd, Nome, NIF, Morada -> {V,F,D}
@@ -70,7 +70,6 @@ excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nomeInterdito,Nif,M
 +adjudicante(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
                                      (adjudicante(6,nomeInterdito, 501413197, "Porto"),
                                      nao(nulointerdito(nomeInterdito))), R), comprimento(R,0)). 
-
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicataria: IdAda, Nome, NIF, Morada -> {V,F,D}

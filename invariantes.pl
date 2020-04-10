@@ -19,15 +19,16 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Contrato
-% 
+
 % Garantir que cada contrato só tem 1 dos 3 tipos de procedimentos possiveis + 1 desconhecido
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :: (contrato(IdC,IdAd,IdAda,TContrato,ajuste_direto,D,V,P,L,DT);
-															 contrato(IdC,IdAd,IdAda,TContrato,consulta_previa,D,V,P,L,DT);
-															 contrato(IdC,IdAd,IdAda,TContrato,tP_desconhecido,D,V,P,L,DT);
-                                                     		contrato(IdC,IdAd,IdAda,TContrato,concurso_publico,D,V,P,L,DT)).
+															     contrato(IdC,IdAd,IdAda,TContrato,consulta_previa,D,V,P,L,DT);
+															     contrato(IdC,IdAd,IdAda,TContrato,tP_desconhecido,D,V,P,L,DT);
+                                                     		     contrato(IdC,IdAd,IdAda,TContrato,concurso_publico,D,V,P,L,DT)).
 
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
 +contrato(IdC,_,_,_,ajuste_direto,_,V,_,_,_) :: (V =< 5000).
+
 %Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
 +contrato(IdC,_,_,TContrato,ajuste_direto,_,_,_,_,_) :: (contrato(IdC,_,_,aquisicao,ajuste_direto,_,_,_,_,_);
 													   contrato(IdC,_,_,locacao_bens_moveis,ajuste_direto,_,_,_,_,_);
@@ -50,7 +51,6 @@ sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
 +contrato(IdC,_,_,_,_,_,V,_,_,_) :: valorValido(V).
 
-
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
 +(-contrato(IdC,_,_,_,_,_,V,_,_,_)) :: valorValido(V).
 
@@ -60,7 +60,6 @@ sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 %Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1),
 									  (solucoes(Nif, adjudicante(_,_,Nif,_),R2), comprimento(R2,1))).
-
 
 % Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,Nif,Morada), R), 
@@ -79,6 +78,7 @@ sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 
 % Garantir que o nif do adjudicante é válido para conhecimento negatuvo
 +(-adjudicante(_,_,Nif,_)) :: nifValido(Nif).
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicataria
 

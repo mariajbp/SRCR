@@ -12,8 +12,6 @@ nao(Q).
 % Encontra todas as soluções
 solucoes(X, XS, R) :- findall(X, XS, R).
 
-
-
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado comprimento: X,R -> {V,F}
 % Devolve o comprimento de uma lista

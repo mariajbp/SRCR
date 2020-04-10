@@ -111,8 +111,14 @@ excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,moradaIn
                                        (adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, moradaInterdita),
                                        nao(nulointerdito(moradaInterdita))), R), comprimento(R,0)).
 
+%Excecoes para conhecimento incerto
+%% Tipo
+excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
+        contrato(IdC,NifAd,NifAda,desconhecido,TipoProcedimento,Desc,Val,Prazo,Local,Data).
+%
 nulointerdito(moradaInterdita).
 nulointerdito(valorInterdito).
 nulointerdito(dataInterdita).
 nulointerdito(prazoInterdito).
 nulointerdito(nomeInterdito).
+nulointerdito(procedimentoInterdito).

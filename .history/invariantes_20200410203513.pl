@@ -34,17 +34,17 @@
 
 %Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
-													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
-													       contrato(IdC,_,_,tC_desconhecido,"Ajuste Direto",_,_,_,_,_);
-   													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
+													   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
+													   contrato(IdC,_,_,tC_desconhecido,"Ajuste Direto",_,_,_,_,_);
+   													 contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
 
 % Prazo de vigencia ate 1 ano
 +contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo=<365.
 										
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),(Vl =\= -1),menos3Anos(Dt,Data)),L),
-                                                                                       sumVals([-Val|L],Ret),
-                                                                                       Ret<75000).
+                                                                                sumVals([-Val|L],Ret),
+                                                                                Ret<75000).
 
 menos3Anos(data(_,_,NYDt),data(_,_,NYData)):-SubY is NYData-NYDt, SubY =< 3.
 

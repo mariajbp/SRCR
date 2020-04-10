@@ -110,9 +110,9 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito interdito
 %
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor) :-
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor):-
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :-
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)):-
                       contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)
     )).
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,morada):-

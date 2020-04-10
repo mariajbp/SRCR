@@ -59,7 +59,7 @@ evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,Data_desconheci
 %--- Adjudicante 
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicante com um nome desconhecido
-evolucao(adjudicante(IdAd,Nome_Desconhecido,Nif,Morada), adjudicante, incerto, nome) :-
+evolucao(adjudicante(IdAd,nome_Desconhecido,Nif,Morada), adjudicante, incerto, nome) :-
     evolucao(adjudicante(IdAd,Nome_Desconhecido,Nif,Morada), positivo),
     insercao((excecao(adjudicante(Id,N,Nadj,M)) :-
                       adjudicante(Id,nome_Desconhecido,Nadj,M))).
@@ -110,9 +110,9 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito interdito
 %
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor) :-
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor):-
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :-
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)):-
                       contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)
     )).
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,morada):-

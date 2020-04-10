@@ -19,7 +19,6 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Contrato
-
 %Garantir que não há 2 contratos com ids iguais
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_),R), comprimento(R,1)).
 
@@ -34,17 +33,17 @@
 
 %Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
-													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
-													       contrato(IdC,_,_,tC_desconhecido,"Ajuste Direto",_,_,_,_,_);
-   													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
+													   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
+													   contrato(IdC,_,_,tC_desconhecido,"Ajuste Direto",_,_,_,_,_);
+   													 contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
 
 % Prazo de vigencia ate 1 ano
 +contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo=<365.
 										
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)::(solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),(Vl =\= -1),menos3Anos(Dt,Data)),L),
-                                                                                       sumVals([-Val|L],Ret),
-                                                                                       Ret<75000).
+                                                                                sumVals([-Val|L],Ret),
+                                                                                Ret<75000).
 
 menos3Anos(data(_,_,NYDt),data(_,_,NYData)):-SubY is NYData-NYDt, SubY =< 3.
 
@@ -83,7 +82,9 @@ sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 +(-adjudicante(_,_,Nif,_)) :: nifValido(Nif).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   - 
+%evolucao(contrato(40,600018709,502381973,TC_desconhecido,ajuste_direto,desc,500,30,local,data(1,1,2020)), contrato,incerto,tipocontrato).
 % Invariantes Estruturais e Referenciais: Adjudicataria
+%+contrato(100,506696464,980474710, aquisicao_servicos, ajuste_direto, "R", 2800, 30, "V", data(16,02,2010)).
 
 %Garantir que o id e nif de cada entidade adjudicataria é único
 +adjudicataria(IdAda, Nome, Nif, Morada) :: (solucoes(IdAda,adjudicataria(IdAda,_,_,_),R),comprimento(R,1),

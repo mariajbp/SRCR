@@ -10,7 +10,7 @@
 :- op(900,xfy,'::').
 :- dynamic adjudicante/4.
 :- dynamic adjudicataria/4.
-:- dynamic contrato/9.
+:- dynamic contrato/10.
 :- dynamic idAdjud/1.
 :- dynamic idAdjudicata/1.
 :- dynamic excecao/1.
@@ -22,3 +22,16 @@
 :- include('aux.pl').
 :- include('evinvolucao.pl').
 :- include('invariantes.pl').
+
+
+% Extensao do meta-predicado demo: Questao,Resposta -> {"verdadeiro","falso","desconhecido"}
+% capaz de responder a uma única questão
+demo(Q,verdadeiro) :- Q.
+demo(Q,falso) :- -Q.
+demo(Q,desconhecido) :- nao(Q), nao(-Q).
+
+% Extensao do meta-predicado siLista: [Questao],[Resposta] -> {V,F,D}
+% capaz de responder a várias questões em simultâneo
+demoList([Q],[R]):- demo(R,S).
+demoList([Q|Qs],[R|Rs]) :- demo(Q,R), demoList(Qs,Rs).
+%%

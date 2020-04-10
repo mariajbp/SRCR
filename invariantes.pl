@@ -79,9 +79,10 @@ sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 % Garantir que o nif do adjudicante é válido para conhecimento negatuvo
 +(-adjudicante(_,_,Nif,_)) :: nifValido(Nif).
 
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+%--------------------------------- - - - - - - - - - -  -  -  -  -   - 
+%evolucao(contrato(40,600018709,502381973,TC_desconhecido,ajuste_direto,desc,500,30,local,data(1,1,2020)), contrato,incerto,tipocontrato).
 % Invariantes Estruturais e Referenciais: Adjudicataria
-
+%+contrato(100,506696464,980474710, aquisicao_servicos, ajuste_direto, "R", 2800, 30, "V", data(16,02,2010)).
 %Garantir que o id e nif de cada entidade adjudicataria é único
 +adjudicataria(IdAda, Nome, Nif, Morada) :: (solucoes(IdAda,adjudicataria(IdAda,_,_,_),R),comprimento(R,1),
 											(solucoes(Nif,adjudicataria(_,Nif,_,_),R2),comprimento(R2,1))).

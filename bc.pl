@@ -31,9 +31,9 @@ contrato(12,508481287,508592909, "Aquisicao de bens moveis", "consulta Previa", 
 excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(contrato(Id,IdA,IdAda,Tc,TP,Desc,valorInterdito,Pr,Local,Data)).
 
 
-+contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),
++contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),(
                                                          contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valorInterdito, 352, data(14,01,2020)),
-                                                         nao(nulointerdito(valorInterdito)),R, comprimento(R,0))).
+                                                         nao(nulointerdito(valorInterdito))),R), comprimento(R,0)).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicante: IdAd, Nome, NIF, Morada -> {V,F,D}
@@ -46,7 +46,7 @@ adjudicante(5, "Servicos de Accao Social da Universidade do Minho", 680047360, "
 adjudicante(7, "Centro Hospitalar Universitario de Lisboa Norte", 508481287, "Lisboa").
 adjudicante(10, "Gestao Ambiental e de Residuos", 506346773, "Evora").
 adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
-
+%contrato(100,506696464,980474710, aquisicao_servicos, ajuste_direto, "R", 2800, 30, "V", data(16,02,2010)).
 % ------- Conhecimento Perfeito Negativo
 -adjudicante(9, "Municipio de Braganca", 501128840, "Braganca").
 

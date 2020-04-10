@@ -17,32 +17,25 @@ evolucao(T, negativo) :- solucoes(Inv, +(-T) :: Inv, Linv),
 % Evolução de conhecimento imperfeito incerto
 
 %--- Contrato
+%evolucao(contrato(99,123456789,123456789,tC_desconhecido,tProcedimento,d,200,200,whatever,data(1,1,2000)))
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um tipo de contrato desconhecido
-evolucao(contrato(IdC,IdAd,IdAda,TC_desconhecido,TProcedimento,D,V,P,L,DT), incerto, tipocontrato) :-
-    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,desconhecido,TProcedimento,D,V,P,L,DT)) :: Inv, Linv),
-    insercao(contrato(IdC,IdAd,IdAda,desconhecido,TProcedimento,D,V,P,L,DT)),
-    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TC_desconhecido,TProcedimento,D,V,P,L,DT), contrato, incerto, tipocontrato) :-
+    evolucao(contrato(IdC,IdAd,IdAda,tC_desconhecido,TProcedimento,D,V,P,L,DT), positivo),
+    insercao((excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
+                      contrato(IdC,NifAd,NifAda,tC_desconhecido,TipoProcedimento,Desc,Val,Prazo,Local,Data))).
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um tipo de procedimento desconhecido
-evolucao(contrato(IdC,IdAd,IdAda,TC,TProcedimento,D,V,P,L,DT), incerto, tipoprocedimento) :-
-    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TC,desconhecido,D,V,P,L,DT)) :: Inv, Linv),
-    insercao(contrato(IdC,IdAd,IdAda,TC,desconhecido,D,V,P,L,DT)),
-    teste(Linv).
-% Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma descrição desconhecida
-evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D_desconhecida,V,P,L,DT), incerto, desc) :-
-    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,desconhecido,V,P,L,DT)) :: Inv, Linv),
-    insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,desconhecido,V,P,L,DT)),
-    teste(Linv).
-%------------------------------------------------------------------------------------------------------------%
-%                                                                                                            %
-%                                                                                                            %
-%                                                     TO DO                                                   %
-%                                                                                                            %
-%                                                                                                            %
-%                                                                                                            %
-%------------------------------------------------------------------------------------------------------------%
+evolucao(contrato(IdC,IdAd,IdAda,TContrato,_,D,V,P,L,DT), contrato, incerto, tipoprocedimento) :-
+    evolucao(contrato(IdC,IdAd,IdAda,TContrato,tP_desconhecido,D,V,P,L,DT), positivo),
+    insercao( (excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
+                      contrato(IdC,NifAd,NifAda,TipoContrato,tP_desconhecido,Desc,Val,Prazo,Local,Data))).                    
 
+% Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma descrição desconhecida
+evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D_desconhecida,V,P,L,DT), contrato, incerto, desc) :-
+    evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,d_desconhecida,V,P,L,DT), positivo),
+    insercao((excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
+                      contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,d_desconhecida,Val,Prazo,Local,Data))).     
   
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um prazo desconhecido
 evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P_desconhecido,L,DT) ,contrato, incerto, prazo) :-
@@ -117,9 +110,9 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito interdito
 %
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor) :-
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor):-
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :-
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)):-
                       contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)
     )).
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,morada):-

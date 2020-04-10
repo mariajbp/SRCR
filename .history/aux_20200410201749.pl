@@ -1,6 +1,8 @@
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Predicados Auxiliares
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
+
+
 % Extensao do meta-predicado não: Q -> {V,F}
 
 % Devolve o valor de verdade contrário a Q (negação fraca)

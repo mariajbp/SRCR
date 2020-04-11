@@ -24,5 +24,12 @@ insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
 )),
 teste(Linv).
 
-evolucao(contrato(40,600218719,501181973,lol,"Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
+evolucao(contrato(40,600218719,501181973,lol,"Concurso",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
+excecao(contrato(40,600218719,501181973,lol,"Ajuste Direto",desc,340,25,local,data(1,1,2020)))
 
+
+evolucao(contrato(40,600018709,502381973,idk,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)), incerto, tipocontrato).
+
+evolucao(, incerto, nome).
+(adjudicataria(20,nomee,987654321,morada)).
+evolucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, descricao).

@@ -20,13 +20,13 @@
 % Invariante que garante que não existem excecoes repetidas
 +(excecao(E)) :: (solucoes(E, excecao(E), R), comprimento(R, 1)).
 % Invariante que não permite adicionar conhecimento perfeito positivo que contradiz conhecimento perfeito negativo
-+contrato(A,B,C,D,E,F,G,H,I,J)		:: nao(solucoes(A,-contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1)).
-+adjudicante(A,B,C,D) 				:: nao(solucoes(A,-adjudicante(A,B,C,D),L),comprimento(L,1)).
-+adjudicataria(A,B,C,D) 			:: nao(solucoes(A,-adjudicataria(A,B,C,D),L),comprimento(L,1)).
++contrato(A,B,C,D,E,F,G,H,I,J)		:: nao((solucoes(A,-contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1))).
++adjudicante(A,B,C,D) 				:: nao((solucoes(A,-adjudicante(A,B,C,D),L),comprimento(L,1))).
++adjudicataria(A,B,C,D) 			:: nao((solucoes(A,-adjudicataria(A,B,C,D),L),comprimento(L,1))).
 % Invariante que não permite adicionar conhecimento perfeito negativo que contradiz conhecimento perfeito positivo
-+(-contrato(A,B,C,D,E,F,G,H,I,J)) 	:: nao(solucoes(A,contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1)).
-+(-adjudicante(A,B,C,D)) 			:: nao(solucoes(A,adjudicante(A,B,C,D),L),comprimento(L,1)).
-+(-adjudicataria(A,B,C,D)) 			:: nao(solucoes(A,adjudicataria(A,B,C,D),L),comprimento(L,1)).
++(-contrato(A,B,C,D,E,F,G,H,I,J)) 	:: nao((solucoes(A,contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1))).
++(-adjudicante(A,B,C,D)) 			:: nao((solucoes(A,adjudicante(A,B,C,D),L),comprimento(L,1))).
++(-adjudicataria(A,B,C,D)) 			:: nao((solucoes(A,adjudicataria(A,B,C,D),L),comprimento(L,1))).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Contrato

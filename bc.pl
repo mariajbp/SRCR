@@ -61,12 +61,12 @@ excecao(adjudicante(4, "Universidade do Minho", 502011378, "Guimaraes")).
 
 % ------- Conhecimento Imperfeito Interdito
 %É impossivel saber a nome da entidade
-adjudicante(6, nomeInterdito, 501413197, "Porto").
+adjudicante(6, nome_interdito, 501413197, "Porto").
 excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nomeInterdito,Nif,Morada).
 
 +adjudicante(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
-                                     (adjudicante(6,nomeInterdito, 501413197, "Porto"),
-                                     nao(nulointerdito(nomeInterdito))), R), comprimento(R,0)). 
+                                     (adjudicante(6,Nom, 501413197, "Porto"),
+                                     nao(nulointerdito(Nom))), R), comprimento(R,0)). 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicataria: IdAda, Nome, NIF, Morada -> {V,F,D}

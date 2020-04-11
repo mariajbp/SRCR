@@ -23,3 +23,6 @@ insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
     nao(nulointerdito(interdito))),R), comprimento(R,0)).
 )),
 teste(Linv).
+
+evolucao(contrato(40,600218719,501181973,lol,"Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
+

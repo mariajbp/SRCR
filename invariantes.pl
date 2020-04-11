@@ -12,11 +12,11 @@
 % Invariante que garante que não existe conhecimento imperfeito generico repetido
 +imperfeito(CII) 						:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existe conhecimento imperfeito incerto repetido
-+incerto(CII) 						:: imperfeito(CII).
++incerto(CII) 						:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existe conhecimento imperfeito impreciso repetido
-+impreciso(CII) 					:: imperfeito(CII).
++impreciso(CII) 					:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existe conhecimento imperfeito interdito repetido
-+interdito(CII) 					:: imperfeito(CII).
++interdito(CII) 					:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existem excecoes repetidas
 +(excecao(E)) :: (solucoes(E, excecao(E), R), comprimento(R, 1)).
 % Invariante que não permite adicionar conhecimento perfeito positivo que contradiz conhecimento perfeito negativo
@@ -57,7 +57,7 @@
 +impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: ( excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)), V =< 5000).
 +incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,valor_interdito,_,_,_)) ; V =< 5000).
 
-%Garantir que o contrato por ajuste direto é um contrato de aquisicao ou locacao de bens moveis ou aquisicao de serviços ou desconheciodo
+%Garantir q.erviços ou desconheciodo
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
 													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
    													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
@@ -112,7 +112,7 @@
 % Invariantes Estruturais e Referenciais: Adjudicante
 
 %Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
-+adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_),R), nao(excecao(adjudicante(IdAd,Nome,Nif,Morada)))), comprimento(R,1)).
++adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1)).
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
 
 % Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo

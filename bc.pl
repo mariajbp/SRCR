@@ -13,11 +13,9 @@ contrato(8,600006638,504654748, "Aquisicao de bens moveis", "Consulta Previa", "
 % ------- Conhecimento Perfeito Negativo
 -contrato(9,501128840,502605731, "Aquisicao de servicos", "Ajuste Direto", "Prestacao de Servicos de Informatica para a Gestao dos Clientes", 4800.50, 365, data(17,03,2020)).
 
-
 % ------- Conhecimento Imperfeito Incerto
 %Não se sabe o prazo do contrato
 contrato(10,506346773, 503504564, "Locacao de bens moveis", "Concurso Publico", "Fornecimento de energia eletrica em BTN e MT para as instalacoes da GESAMB", 1780.22, prazo_desconhecido, data(18,01,2019)).
-excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,prazo_desconhecido,Local,Data).
 
 % ------- Conhecimento Imperfeito Impreciso
 %Não se sabe se o valor do contrato é 500€ ou 4700€
@@ -46,7 +44,7 @@ adjudicante(5, "Servicos de Accao Social da Universidade do Minho", 680047360, "
 adjudicante(7, "Centro Hospitalar Universitario de Lisboa Norte", 508481287, "Lisboa").
 adjudicante(10, "Gestao Ambiental e de Residuos", 506346773, "Evora").
 adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
-%contrato(100,506696464,980474710, aquisicao_servicos, ajuste_direto, "R", 2800, 30, "V", data(16,02,2010)).
+
 % ------- Conhecimento Perfeito Negativo
 -adjudicante(9, "Municipio de Braganca", 501128840, "Braganca").
 
@@ -54,7 +52,6 @@ adjudicante(11, "Fundo Ambiental", 600086992, "Portugal").
 
 %Não se sabe a morada da entidade
 adjudicante(8, "Supremo Tribunal Administrativo", 600006638, morada_desconhecida).
-excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_desconhecida).
 
 % ------- Conhecimento Imperfeito Impreciso
 
@@ -91,8 +88,6 @@ adjudicataria(11, "SGald Automotive", 503188620, "Portugal").
 
 %Não se sabe a morada da entidade
 adjudicataria(3, "Plateia de Calculos Unipessoal Lda", 515204463, morada_desconhecida).
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_desconhecida).
-
 
 % ------- Conhecimento Imperfeito Impreciso
 
@@ -105,20 +100,68 @@ excecao(adjudicataria(2, "Carlos Manuel Pires", 809589087, "Mirandela")).
 
 %É impossivel saber a morada da entidade
 adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, moradaInterdita).
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,moradaInterdita).
 
 +adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
                                        (adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, moradaInterdita),
                                        nao(nulointerdito(moradaInterdita))), R), comprimento(R,0)).
 
-%Excecoes para conhecimento incerto
-%% Tipo
-excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
-        contrato(IdC,NifAd,NifAda,desconhecido,TipoProcedimento,Desc,Val,Prazo,Local,Data).
-%
-nulointerdito(moradaInterdita).
-nulointerdito(valorInterdito).
-nulointerdito(dataInterdita).
-nulointerdito(prazoInterdito).
-nulointerdito(nomeInterdito).
-nulointerdito(procedimentoInterdito).
+
+
+
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Exceções para conhecimento imperfeito incerto
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+
+% ---- Exceções do predicado Contrato
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,tc_incerto,TP,Desc,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,tp_incerto,Desc,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,descricao_incerta,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,valor_incerto,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,prazo_incerto,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,local_incerto,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data_incerta).
+
+% ---- Exceções do predicado Adjudicante
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_incerto,Nif,Morada).
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_incerta).
+
+
+% ---- Exceções do predicado Adjudicataria
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_incerto,Nif,Morada).
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_incerta).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Exceções para conhecimento imperfeito interdito
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+
+% ---- Exceções do predicado Contrato
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,tc_interdito,TP,Desc,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,tp_interdito,Desc,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,descricao_interdita,Val,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,valor_interdito,P,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,prazo_interdito,Local,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,local_interdito,Data).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data_interdita).
+
+% ---- Exceções do predicado Adjudicante
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
+
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_interdita).
+
+% ---- Exceções do predicado Adjudicataria
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_interdita).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+nulointerdito(tc_interdito).
+nulointerdito(tp_interdito).
+nulointerdito(descricao_interdita).
+nulointerdito(valor_interdito).
+nulointerdito(prazo_interdito).
+nulointerdito(local_interdito).
+nulointerdito(data_interdita).
+
+nulointerdito(nome_interdito).
+nulointerdito(morada_interdita).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

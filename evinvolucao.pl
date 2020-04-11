@@ -152,12 +152,45 @@ evolucao(adjudicataria(IdAd,Nome,Nif,M),impreciso,morada):-
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito interdito
 %
+
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,tipocontrato) :-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,tc_interdito,TProcedimento,D,Valor,P,L,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,T,TProcedimento,D,Valor,P,L,Data),
+            nao(nulointerdito(T))),R), comprimento(R,0))
+    )),
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,tipoprocedimento) :-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,tp_interdito,D,Valor,P,L,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TPr,D,Valor,P,L,Data),
+            nao(nulointerdito(TPr))),R), comprimento(R,0))
+    )),
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,tipocontrato) :-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,descricao_interdita,Valor,P,L,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,Des,Valor,P,L,Data),
+            nao(nulointerdito(Des))),R), comprimento(R,0))
+    )),
+    teste(Linv).
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,valor) :-
     solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valor_interdito,P,L,Data)),
     insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
-            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
-            nao(nulointerdito(Val))),R), comprimento(R,0))
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,V,P,L,Data),
+            nao(nulointerdito(V))),R), comprimento(R,0))
+    )),
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,prazo) :-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,prazo_interdito,L,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,Pra,L,Data),
+            nao(nulointerdito(Pra))),R), comprimento(R,0))
     )),
     teste(Linv).
 
@@ -165,53 +198,48 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),in
     solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,morada_interdita,Data)),
     insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
-            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
-            nao(nulointerdito(Local))),R), comprimento(R,0))
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,Loc,Data),
+            nao(nulointerdito(Loc))),R), comprimento(R,0))
     )),
     teste(Linv).
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,data):-
     solucoes(Inv, +interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
     insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data_interdita)),
     insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
-            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),
             nao(nulointerdito(Dat))),R), comprimento(R,0))
-    )),
-    teste(Linv).        
-evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, morada ):-
-    solucoes(Inv, +interdito(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
-    insercao(adjudicante(IdAd,Nome,Nif,morada_interdita)),
-    insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
-        adjudicante(IdAd,Nome,Nif,M),
-        nao(nulointerdito(M))),R), comprimento(R,0))
     )),
     teste(Linv).
 
-evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, nome ):-
-    solucoes(Inv, interdito(adjudicante(IdAd,nome_interdito,Nif,M)) :: Inv,Linv),
-    insercao(adjudicante(IdAd,Nome,Nif,M)),
-    insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
-        adjudicante(IdAd,Nome,Nif,M),
-        nao(nulointerdito(Nome))),R), comprimento(R,0))
-    )),
-    teste(Linv).
-evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, morada ):-
-        solucoes(Inv, +interdito(adjudicataria(IdAd,Nome,Nif,M)) :: Inv,Linv),
-        insercao(adjudicataria(IdAd,Nome,Nif,morada_interdita)),
-        insercao((+adjudicataria(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
-            adjudicataria(IdAd,Nome,Nif,M),
-            nao(nulointerdito(M))),R), comprimento(R,0))
-        )),
+%% Adjudicante Interdita
+evolucao(adjudicante(Id,Nome,Nif,Morada), interdito, nome ):-
+        solucoes(Inv, +interdito(adjudicante(Id,Nome,Nif,Morada)) :: Inv,Linv),
+        insercao(adjudicante(Id, nome_interdito, Nif, Morada)),
+        insercao((+adjudicante(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicante(Id,N,Nif,Morada),nao(nulointerdito(N))),R),
+                        comprimento(R,0)))),
         teste(Linv).
-    
-evolucao(adjudicataria(IdAd,Nome,Nif,M), interdito, nome ):-
-    solucoes(Inv, interdito(adjudicataria(IdAd,nome_interdito,Nif,M)) :: Inv,Linv),
-    insercao(adjudicataria(IdAd,Nome,Nif,M)),
-    insercao((+adjudicataria(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
-        adjudicataria(IdAd,Nome,Nif,M),
-        nao(nulointerdito(Nome))),R), comprimento(R,0))
-    )),
-    teste(Linv).
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+
+evolucao(adjudicante(Id,Nome,Nif,Morada), interdito, morada ):-
+        solucoes(Inv, +interdito(adjudicante(Id,Nome,Nif,Morada)) :: Inv,Linv),
+        insercao(adjudicante(Id, Nome, Nif, morada_interdita)),
+        insercao((+adjudicante(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicante(Id,Nome,Nif,M),nao(nulointerdito(M))),R),
+                        comprimento(R,0)))),
+        teste(Linv).
+%% Adjudicataria Interdita
+evolucao(adjudicataria(Id,Nome,Nif,Morada), interdito, nome ):-
+        solucoes(Inv, +interdito(adjudicataria(Id,Nome,Nif,Morada)) :: Inv,Linv),
+        insercao(adjudicataria(Id, nome_interdito, Nif, Morada)),
+        insercao((+adjudicataria(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicataria(Id,N,Nif,Morada),nao(nulointerdito(N))),R),
+                        comprimento(R,0)))),
+        teste(Linv).        
+evolucao(adjudicataria(Id,Nome,Nif,Morada), interdito, morada ):-
+        solucoes(Inv, +interdito(adjudicataria(Id,Nome,Nif,Morada)) :: Inv,Linv),
+        insercao(adjudicataria(Id, Nome, Nif, morada_interdita)),
+        insercao((+adjudicataria(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicataria(Id,Nome,Nif,M),nao(nulointerdito(M))),R),
+                        comprimento(R,0)))),
+        teste(Linv).
+
+--------- - - - - - - - - - -  -  -  -  -   -
 % Involução de conhecimento perfeito (positivo e negativo)
 
 % Retira conhecimento da base de conhecimento

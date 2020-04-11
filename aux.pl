@@ -39,4 +39,7 @@ nifValido(Nif) :- (Nif >= 100000000), Nif =< 999999999.
 % Valor válido (>= 0)
 valorValido(V) :- V >= 0.
 
+menos3Anos(data(_,_,NYDt),data(_,_,NYData)):-SubY is NYData-NYDt, SubY =< 3.
+sumVals([V],V).
+sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
 

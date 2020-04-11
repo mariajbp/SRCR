@@ -34,115 +34,183 @@ evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D_desconhecida,V,P,L,DT
     solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,desconhecido,V,P,L,DT)) :: Inv, Linv),
     insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,desconhecido,V,P,L,DT)),
     teste(Linv).
-%------------------------------------------------------------------------------------------------------------%
-%                                                                                                            %
-%                                                                                                            %
-%                                                     TO DO                                                   %
-%                                                                                                            %
-%                                                                                                            %
-%                                                                                                            %
-%------------------------------------------------------------------------------------------------------------%
 
-  
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um prazo desconhecido
-evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P_desconhecido,L,DT) ,contrato, incerto, prazo) :-
-    evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,-1,L,DT), positivo),
-    insercao((excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
-                      contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,-1,Local,Data))).    
+evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P_desconhecido,L,DT) , incerto, prazo) :-
+    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,desconhecido,L,DT)) :: Inv, Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,desconhecido,L,DT)),
+    teste(Linv).
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um local desconhecido
-evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L_desconhecido,DT) ,contrato, incerto, local) :-
-    evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,l_desconhecido,DT), positivo),
-    insercao((excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
-                      contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,l_desconhecido,Data))).    
+evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L_desconhecido,DT), incerto, local) :-
+    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,desconhecido,DT)) :: Inv, Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,desconhecido,DT)),
+    teste(Linv).
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma data desconhecida
-evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,Data_desconhecida) ,contrato, incerto, data) :-
-    evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(-1,-1,-1), positivo),
-    insercao((excecao(contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,Data)) :-
-                      contrato(IdC,NifAd,NifAda,TipoContrato,TipoProcedimento,Desc,Val,Prazo,Local,data(-1,-1,-1))))).  
+evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,Data_desconhecida) , incerto, data) :-
+    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,desconhecido)) :: Inv, Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,desconhecido)),
+    teste(Linv).
 
 
 %--- Adjudicante 
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicante com um nome desconhecido
-evolucao(adjudicante(IdAd,Nome_Desconhecido,Nif,Morada), adjudicante, incerto, nome) :-
-    evolucao(adjudicante(IdAd,Nome_Desconhecido,Nif,Morada), positivo),
-    insercao((excecao(adjudicante(Id,N,Nadj,M)) :-
-                      adjudicante(Id,nome_Desconhecido,Nadj,M))).
+evolucao(adjudicante(IdAd,Nome,Nif,Morada), incerto, nome) :-
+    solucoes(Inv,+incerto(adjudicante(IdAd,desconhecido,Nif,Morada)) :: Inv, Linv),
+    insercao(adjudicante(IdAd,desconhecido,Nif,Morada)),
+    teste(Linv).
 
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicante com uma morada desconhecida
-evolucao(adjudicante(IdAd,Nome,Nif,Morada_desconhecida), adjudicante, incerto, morada) :-
-    evolucao(adjudicante(IdAd,Nome,Nif,morada_desconhecida), positivo),
-    insercao((excecao(adjudicante(Id,N,Nadj,M)) :-
-                      adjudicante(Id,N,Nadj,morada_desconhecida))).
+evolucao(adjudicante(IdAd,Nome,Nif,Morada), incerto, morada) :-
+    solucoes(Inv,+incerto(adjudicante(IdAd,Nome,Nif,desconhecido)) :: Inv, Linv),
+    insercao(adjudicante(IdAd,Nome,Nif,desconhecido)),
+    teste(Linv).
 
-%evolucao(adjudicante(100,nome,10100009,morada_desconhecida), adjudicante, incerto, nome)
 %--- Adjudicatária
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicataria com um nome desconhecido
-evolucao(adjudicataria(IdAd,Nome_Desconhecido,Nif,Morada), adjudicataria, incerto, nome) :-
-    evolucao(adjudicataria(IdAd,nome_Desconhecido,Nif,Morada), positivo),
-    insercao((excecao(adjudicataria(Id,N,Nadj,M)) :-
-                      adjudicataria(Id,nome_Desconhecido,Nadj,M))).
-
+evolucao(adjudicataria(IdAd,Nome,Nif,Morada), incerto, nome) :-
+    solucoes(Inv,+incerto(adjudicataria(IdAd,desconhecido,Nif,Morada)) :: Inv, Linv),
+    insercao(adjudicataria(IdAd,desconhecido,Nif,Morada)),
+    teste(Linv).
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de uma djudicataria com uma morada desconhecida
-evolucao(adjudicataria(IdAd,Nome,Nif,Morada_desconhecida), adjudicataria, incerto, morada) :-
-    evolucao(adjudicataria(IdAd,Nome,Nif,morada_desconhecida), positivo),
-    insercao((excecao(adjudicataria(Id,N,Nadj,M)) :-
-                      adjudicataria(Id,N,Nadj,morada_desconhecida))).
+evolucao(adjudicataria(IdAd,Nome,Nif,Morada), incerto, morada) :-
+    solucoes(Inv,+incerto(adjudicataria(IdAd,Nome,Nif,desconhecido)) :: Inv, Linv),
+    insercao(adjudicataria(IdAd,Nome,Nif,desconhecido)),
+    teste(Linv).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito impreciso
+%% Contrato Impreciso por opçao
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,tipocontrato):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,tipoprocedimento):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,descricao):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,valor):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,prazo):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,local):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impreciso,data):-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :: Inv,Linv),
+    insercao(excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT))) ,
+    teste(Linv).
+%% Contrato impreciso por intervalo
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT), impreciso, valor, LimiteInferior, LimiteSuperior) :-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,DT)) :: Inv,Linv),
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,DT)) :-
+                      Val >= LimiteInferior, Val =< LimiteSuperior)),
+    teste(Linv).
 
-% Insere conhecimento imperfeito impreciso na base de conhecimento de qualquer fonte de conhecimento
-evolucao(T, impreciso) :- solucoes(Inv, +(excecao(T)) :: Inv, Linv),
-                          insercao(excecao(T)),
-                          teste(Linv).
-
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),contrato, impreciso, valor, LimiteInferior, LimiteSuperior) :-
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :-
-                      Valor >= LimiteInferior, Valor =< LimiteSuperior)).
-
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),contrato, impreciso, prazo, LimiteInferior, LimiteSuperior) :-
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT) ):-
-                      P >= LimiteInferior, P =< LimiteSuperior )).
-
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M,A)),contrato, impreciso, data, data(Di,Mi,Ai), data(Ds,Ms,As)) :-
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT)) :-
-                      ((A > Ai);(A==Ai,(M>Mi;(M==Mi,D>=Di)))),((A < As);(A==As,(M<Ms;(M==Ms,D=<Ds)))))).
-
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT), impreciso, prazo, LimiteInferior, LimiteSuperior) :-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,Pr,L,DT)) :: Inv,Linv),
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,Pr,L,DT)) :-
+                      Pr >= LimiteInferior, Pr =< LimiteSuperior)),
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Dt), impreciso, data, data(Di,Mi,Ai), data(Ds,Ms,As)) :-
+    solucoes(Inv, +impreciso(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M,A))) :: Inv,Linv),
+    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M,A))) :-
+                      ((A > Ai);(A==Ai,(M>Mi;(M==Mi,D>=Di)))),((A < As);(A==As,(M<Ms;(M==Ms,D=<Ds)))))),
+    teste(Linv).
+%% Adjudicante impreciso por opção
+evolucao(adjudicante(IdAd,Nome,Nif,M),impreciso,nome):-
+    solucoes(Inv, +impreciso(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
+    insercao(excecao(adjudicante(IdAd,Nome,Nif,M))) ,
+    teste(Linv).
+evolucao(adjudicante(IdAd,Nome,Nif,M),impreciso,morada):-
+    solucoes(Inv, +impreciso(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
+    insercao(excecao(adjudicante(IdAd,Nome,Nif,M))) ,
+    teste(Linv).
+%% Adjudicataria impreciso por opção
+evolucao(adjudicataria(IdAd,Nome,Nif,M),impreciso,nome):-
+    solucoes(Inv, +impreciso(adjudicataria(IdAd,Nome,Nif,M)) :: Inv,Linv),
+    insercao(excecao(adjudicataria(IdAd,Nome,Nif,M))) ,
+    teste(Linv).
+evolucao(adjudicataria(IdAd,Nome,Nif,M),impreciso,morada):-
+    solucoes(Inv, +impreciso(adjudicataria(IdAd,Nome,Nif,M)) :: Inv,Linv),
+    insercao(excecao(adjudicataria(IdAd,Nome,Nif,M))) ,
+    teste(Linv).
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Evolução de conhecimento imperfeito interdito
 %
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,valor) :-
-    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :-
-                      contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valorInterdito,P,L,Data)
-    )).
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,morada):-
-    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,moradaInterdita,Data)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)):-
-                      contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,moradaInterdita,Data))).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,valor) :-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,valor_interdito,P,L,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
+            nao(nulointerdito(Val))),R), comprimento(R,0))
+    )),
+    teste(Linv).
 
-evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),contrato,interdito,data):-
-    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,dataInterdita)),
-    insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)):-
-                      contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,dataInterdita))).
-               
-evolucao(adjudicante(IdAd,Nome,Nif,M),adjudicante, interdito, morada ):- insercao(adjudicante(IdAd,Nome,Nif,moradaInterdita)),
-    insercao((excecao(adjudicante(IdAd,Nome,Nif,M)):- adjudicante(IdAd,Nome,Nif,moradaInterdita))).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,morada):-
+    solucoes(Inv, interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,morada_interdita,Data)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
+            nao(nulointerdito(Local))),R), comprimento(R,0))
+    )),
+    teste(Linv).
+evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),interdito,data):-
+    solucoes(Inv, +interdito(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data)) :: Inv,Linv),
+    insercao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data_interdita)),
+    insercao((+contrato(I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat) :: (solucoes((I,IdA,IdA,Tc,TP,Desc,Val,Pr,Local,Dat),(
+            contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,Data),
+            nao(nulointerdito(Dat))),R), comprimento(R,0))
+    )),
+    teste(Linv).        
+evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, morada ):-
+    solucoes(Inv, +interdito(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
+    insercao(adjudicante(IdAd,Nome,Nif,morada_interdita)),
+    insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
+        adjudicante(IdAd,Nome,Nif,M),
+        nao(nulointerdito(M))),R), comprimento(R,0))
+    )),
+    teste(Linv).
 
-evolucao(adjudicante(IdAd,Nome,Nif,M),adjudicante, interdito, nome ):- insercao(adjudicante(IdAd,nomeInterdito,Nif,M)),
-    insercao((excecao(adjudicante(IdAd,Nome,Nif,M)):- adjudicante(IdAd,nomeInterdito,Nif,M))).
-
-evolucao(adjudicataria(IdAd,Nome,Nif,M),adjudicataria, interdito, morada ):- insercao(adjudicataria(IdAd,Nome,Nif,moradaInterdita)),
-    insercao((excecao(adjudicante(IdAd,Nome,Nif,M)):- adjudicataria(IdAd,Nome,Nif,moradaInterdita))).
-
-evolucao(adjudicataria(IdAd,Nome,Nif,M),adjudicataria, interdito, nome ):- insercao(adjudicataria(IdAd,nomeInterdito,Nif,M)),
-    insercao((excecao(adjudicante(IdAd,Nome,Nif,M)):- adjudicataria(IdAd,nomeInterdito,Nif,M))).
+evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, nome ):-
+    solucoes(Inv, interdito(adjudicante(IdAd,nome_interdito,Nif,M)) :: Inv,Linv),
+    insercao(adjudicante(IdAd,Nome,Nif,M)),
+    insercao((+adjudicante(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
+        adjudicante(IdAd,Nome,Nif,M),
+        nao(nulointerdito(Nome))),R), comprimento(R,0))
+    )),
+    teste(Linv).
+evolucao(adjudicante(IdAd,Nome,Nif,M), interdito, morada ):-
+        solucoes(Inv, +interdito(adjudicataria(IdAd,Nome,Nif,M)) :: Inv,Linv),
+        insercao(adjudicataria(IdAd,Nome,Nif,morada_interdita)),
+        insercao((+adjudicataria(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
+            adjudicataria(IdAd,Nome,Nif,M),
+            nao(nulointerdito(M))),R), comprimento(R,0))
+        )),
+        teste(Linv).
+    
+evolucao(adjudicataria(IdAd,Nome,Nif,M), interdito, nome ):-
+    solucoes(Inv, interdito(adjudicataria(IdAd,nome_interdito,Nif,M)) :: Inv,Linv),
+    insercao(adjudicataria(IdAd,Nome,Nif,M)),
+    insercao((+adjudicataria(IdAd,Nome,Nif,M) :: (solucoes((IdAd,Nome,Nif,M),(
+        adjudicataria(IdAd,Nome,Nif,M),
+        nao(nulointerdito(Nome))),R), comprimento(R,0))
+    )),
+    teste(Linv).
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Involução de conhecimento perfeito (positivo e negativo)
 

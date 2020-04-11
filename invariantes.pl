@@ -39,10 +39,10 @@
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :: (contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT);
 															     contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT);
                                                      		     contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT)).
-+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)) :: (contrato(IdC,IdAd,IdAda,TContrato,desconhecido,D,V,P,L,DT);
-																		  contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT);
-															    		  contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT);
-                                                     		    		  contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT)).
++incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)) :: (excecao(contrato(IdC,IdAd,IdAda,TContrato,desconheciodo,D,V,P,L,DT));
+																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT));
+																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT));
+																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT))).
 +impreciso(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)) :: (excecao(contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT))).

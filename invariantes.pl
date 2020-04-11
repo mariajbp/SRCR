@@ -108,6 +108,12 @@
 
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
 +(-contrato(IdC,_,_,_,_,_,V,_,_,_)) :: valorValido(V).
+
+% Garantir que um contrato está associado a um nif existente, quer para uma entidade adjudicante, quer para uma entidade adjudicataria
++contrato(_,Ida,Idada,_,_,_,_,_,_,_) :: ((solucoes(Ida, adjudicante(_,_,Ida,_), R1), comprimento(R1,S1), S1 >= 1),		
+									    (solucoes(Idada, adjudicataria(_,_,Idada,_), R2), comprimento(R2,S2), S2 >= 1)).
+
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante
 

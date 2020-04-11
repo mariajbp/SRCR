@@ -144,6 +144,17 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,I
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,local_interdito,Data).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data_interdita).
 
++contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data) :: (solucoes((Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data),
+                                                         (contrato(Id,_,_,TC,TP,Desc,Val,P,Local,Data), (nulointerdito(TC);
+                                                                                                         nulointerdito(P);
+                                                                                                         nulointerdito(TP);
+                                                                                                         nulointerdito(Desc);
+                                                                                                         nulointerdito(Val);
+                                                                                                         nulointerdito(Local);
+                                                                                                         nulointerdito(Data))),
+                                                          R),
+                                                        comprimento(R,0)).
+
 % ---- Exceções do predicado Adjudicante
 excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
 
@@ -165,3 +176,4 @@ nulointerdito(data_interdita).
 nulointerdito(nome_interdito).
 nulointerdito(morada_interdita).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+intervalo(range).

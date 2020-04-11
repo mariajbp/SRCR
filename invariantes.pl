@@ -33,15 +33,14 @@
 
 %Garantir que não há 2 contratos com ids iguais
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC,( contrato(IdC,_,_,_,_,_,_,_,_,_), nao(excecao(contrato(IdC,_,_,_,_,_,_,_,_,_)) )),R), comprimento(R,1)).
-
 %Garantir que conhecimento perfeito não é imperfeito
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, excecao(contrato(IdC,_,_,_,_,_,_,_,_,_)),R),comprimento(R,0)).
 
 % Garantir que cada contrato só tem 1 dos 3 tipos de procedimentos possiveis
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :: (contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT);
 															     contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT);
-                                                     		     contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT)).														
-+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)) :: (excecao(contrato(IdC,IdAd,IdAda,TContrato,desconheciodo,D,V,P,L,DT));
+                                                     		     contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT)).
++incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)) :: (excecao(contrato(IdC,IdAd,IdAda,TContrato,desconhecido,D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT))).
@@ -52,14 +51,13 @@
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT))).
-
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
 +contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_) :: (V =< 5000).
-+incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,desconhecido,_,_,_)) ; V =< 5000).
-+impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: ( excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)), V =< 5000).
-+incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,valor_interdito,_,_,_)) ; V =< 5000).
++incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,desconhecido,_,_,_)) ; (V =< 5000)).
++impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: ((intervalo(V)) ; (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)), V =< 5000)).
++interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,valor_interdito,_,_,_)) ; V =< 5000).
 
-%Garantir q.erviços ou desconheciodo
+%Garantir q.erviços ou desconhecido
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
 													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
    													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
@@ -74,13 +72,11 @@
 														   excecao(contrato(IdC,_,_,tipo_interdito,"Ajuste Direto",_,_,_,_,_));
 													  	   excecao(contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_));
    													       excecao(contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_))).														
-
 % Prazo de vigencia ate 1 ano
-+contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo =< 365.
-+incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_)) 	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,desconhecido,_,_)); Prazo =< 365).
-+impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Pra,_,_)); Pra =< 365).
++contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo=<365.
++incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_)) 	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,desconhecido,_,_)) ; Prazo=<365).
++impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (intervalo(Prazo);Prazo=<365).
 +interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,prazo_interdito,_,_));Prazo=<365).						
-
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data) :: (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl),
@@ -105,10 +101,10 @@
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000)).
 
-
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito positivo
 +contrato(IdC,_,_,_,_,_,V,_,_,_) :: valorValido(V).
 +incerto(contrato(IdC,_,_,_,_,_,V,_,_,_)) :: (contrato(IdC,_,_,_,_,_,desconhecido,_,_,_) ;valorValido(V)).
++impreciso(contrato(IdC,_,_,_,_,_,V,_,_,_)) :: (contrato(IdC,_,_,_,_,_,valor_interdito,_,_,_) ;valorValido(V)).
 +interdito(contrato(IdC,_,_,_,_,_,V,_,_,_)) :: (contrato(IdC,_,_,_,_,_,valor_interdito,_,_,_) ;valorValido(V)).
 
 % Garantir que o valor de cada contrato é válido (>= 0) para conhecimento perfeito negativo
@@ -151,7 +147,8 @@
 +adjudicataria(IdAda, Nome, Nif, Morada) :: (solucoes(IdAda,adjudicataria(IdAda,_,_,_),R),comprimento(R,1),
 											(solucoes(Nif,adjudicataria(_,_,Nif,_),R2),comprimento(R2,1))).
 
-% Garantir que entidades adjudicatarias com ids diferentes têm diferente informação para conhecimento perfeito positivo
+% Garantir que entidades adjudicatarias com ids diferentes têm diferente informação
+% para conhecimento perfeito positivo
 +adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,Nif,Morada), R), 
 									     comprimento(R,1)).
 

@@ -123,13 +123,13 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,I
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,desconhecido).
 
 % ---- Exceções do predicado Adjudicante
-excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_incerto,Nif,Morada).
-excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_incerta).
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,desconhecido,Nif,Morada).
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,desconhecido).
 
 
 % ---- Exceções do predicado Adjudicataria
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_incerto,Nif,Morada).
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_incerta).
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,desconhecido,Nif,Morada).
+excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,desconhecido).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Exceções para conhecimento imperfeito interdito

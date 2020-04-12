@@ -19,3 +19,11 @@ solucoes(yee,excecao(contrato(40,_,_,_,_,_,2,_,_,_)),L).
 
 
 evolucao(contrato(40,600018709,502381973,idk,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)), interdito, tipocontrato).
+
+
+evolucao(contrato(21,600018709,502381973, "Aquisicao","Concurso Publico","desc", 70, 195, "Lisboa", data(19,03,2051))).
+
+solucoes(Vl,(contrato(_,600018709,502381973,_,_,_,Vl,_,_,Dt)),L).
+evolucao(contrato(21,600018709,502381973, "Aquisicao","Concurso Publico","desc", 70, 195, "Lisboa", data(19,03,2051))).
+
+(solucoes(Vl, (contrato(_,600018709,502381973,_,_,_,Vl,_,_,Dt),nao(nulointerdito(Vl)),nao(contrato(_,600018709,502381973,_,_,_,desconhecido,_,_,Dt)) ,menos3Anos(Dt, data(19,03,2051))),L))

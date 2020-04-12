@@ -79,9 +79,10 @@
 +interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,prazo_interdito,_,_));Prazo=<365).						
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data) :: (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
-																											nao(nulointerdito(Vl),
-																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)) ),
-																											menos3Anos(Dt,Data)),L),
+																											nao(nulointerdito(Vl)),
+																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)),
+																											menos3Anos(Dt,Data)
+																									),L),
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000).
 +incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)) ::(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,desconhecido,Prazo,Local,Data);
@@ -117,6 +118,8 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante
+
+%%%%%%%T%%%%%%%%%O%%%%%%%%%%%%%%%D%%%%%%%%%%%%%%%%%%%%O%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1)).

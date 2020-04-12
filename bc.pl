@@ -156,9 +156,8 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,I
                                                         comprimento(R,0)).
 
 % ---- Exceções do predicado Adjudicante
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
-
-excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_interdita).
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_interdito,Nif,Morada).
+excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_interdita).
 
 % ---- Exceções do predicado Adjudicataria
 excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).

@@ -32,7 +32,13 @@
 % Invariantes Estruturais e Referenciais: Contrato
 
 %Garantir que não há 2 contratos com ids iguais
-+contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC,( contrato(IdC,_,_,_,_,_,_,_,_,_), nao(excecao(contrato(IdC,_,_,_,_,_,_,_,_,_)) )),R), comprimento(R,1)).
++contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
++incerto(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
++interdito(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
+% Contratos com ids diferentes têm diferente informacao
++contrato(IdC,A,B,C,D,E,F,G,H,Data) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
++incerto(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
++interdito(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
 %Garantir que conhecimento perfeito não é imperfeito
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, excecao(contrato(IdC,_,_,_,_,_,_,_,_,_)),R),comprimento(R,0)).
 
@@ -112,8 +118,14 @@
 +(-contrato(IdC,_,_,_,_,_,V,_,_,_)) :: valorValido(V).
 
 % Garantir que um contrato está associado a um nif existente, quer para uma entidade adjudicante, quer para uma entidade adjudicataria
-+contrato(_,Ida,Idada,_,_,_,_,_,_,_) :: ((solucoes(Ida, adjudicante(_,_,Ida,_), R1), comprimento(R1,S1), S1 >= 1),		
-									    (solucoes(Idada, adjudicataria(_,_,Idada,_), R2), comprimento(R2,S2), S2 >= 1)).
++contrato(_,Ida,Idada,_,_,_,_,_,_,_) :: ((solucoes(Ida, (adjudicante(_,_,Ida,_);excecao(adjudicante(_,_,Ida,_))), R1), comprimento(R1,S1), S1 >= 1),		
+									    (solucoes(Idada, (adjudicataria(_,_,Idada,_);excecao(adjudicante(_,_,Ida,_))), R2), comprimento(R2,S2), S2 >= 1)).
++incerto(contrato(_,Ida,Idada,_,_,_,_,_,_,_)) :: ((solucoes(Ida, (adjudicante(_,_,Ida,_);excecao(adjudicante(_,_,Ida,_))), R1), comprimento(R1,S1), S1 >= 1),		
+									    (solucoes(Idada, (adjudicataria(_,_,Idada,_);excecao(adjudicante(_,_,Ida,_))), R2), comprimento(R2,S2), S2 >= 1)).
++impreciso(contrato(_,Ida,Idada,_,_,_,_,_,_,_)) :: ((solucoes(Ida, (adjudicante(_,_,Ida,_);excecao(adjudicante(_,_,Ida,_))), R1), comprimento(R1,S1), S1 >= 1),		
+									    (solucoes(Idada, (adjudicataria(_,_,Idada,_);excecao(adjudicante(_,_,Ida,_))), R2), comprimento(R2,S2), S2 >= 1)).
++interdito(contrato(_,Ida,Idada,_,_,_,_,_,_,_)) :: ((solucoes(Ida, (adjudicante(_,_,Ida,_);excecao(adjudicante(_,_,Ida,_))), R1), comprimento(R1,S1), S1 >= 1),		
+									    (solucoes(Idada, (adjudicataria(_,_,Idada,_);excecao(adjudicante(_,_,Ida,_))), R2), comprimento(R2,S2), S2 >= 1)).
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -121,43 +133,64 @@
 
 %%%%%%%T%%%%%%%%%O%%%%%%%%%%%%%%%D%%%%%%%%%%%%%%%%%%%%O%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
-+adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, adjudicante(IdAd,_,_,_),R), comprimento(R,1)).
+%Garantir que o id e nif de cada entidade adjudicante é único
++adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
 
-% Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo
-+adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,Nif,Morada), R), 
-									   comprimento(R,1)).
++incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
++incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
+
++interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
++interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
+
+% Garantir que adjudicantes com ids diferentes têm diferente informação
++adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
++incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
++interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
 
 % Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeitonegativo
 +(-adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), -adjudicante(_,Nome,Nif,Morada), R), 
 									   comprimento(R,1)).									
 
 % Garantir que não é possível remover uma entidade adjudicataria com um contrato 
--adjudicante(_,_,Nif,_) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),
-                            comprimento(R, 0)).
-						
+-adjudicante(_,_,Nif,_) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+-incerto(adjudicante(_,_,Nif,_)) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+-interdito(adjudicante(_,_,Nif,_)) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+													
 % Garantir que o nif do adjudicante é válido para conhecimento positivo
 +adjudicante(_,_,Nif,_) :: nifValido(Nif).
-
-% Garantir que o nif do adjudicante é válido para conhecimento negatuvo
 +(-adjudicante(_,_,Nif,_)) :: nifValido(Nif).
++incerto(adjudicante(Id,_,Nif,_)) ::(adjudicante(Id,_,desconhecido,_) ;nifValido(Nif)).
++interdito(adjudicante(Id,_,Nif,_)) ::(adjudicante(Id,_,nif_interdito,_) ;nifValido(Nif)).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   - 
 % Invariantes Estruturais e Referenciais: Adjudicataria
-
 %Garantir que o id e nif de cada entidade adjudicataria é único
-+adjudicataria(IdAda, Nome, Nif, Morada) :: (solucoes(IdAda,adjudicataria(IdAda,_,_,_),R),comprimento(R,1),
-											(solucoes(Nif,adjudicataria(_,_,Nif,_),R2),comprimento(R2,1))).
++adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
++adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
-% Garantir que entidades adjudicatarias com ids diferentes têm diferente informação
-% para conhecimento perfeito positivo
-+adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,Nif,Morada), R), 
-									     comprimento(R,1)).
++incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
++incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
-% Garantir que não é possível remover uma entidade adjudicataria com um contrato
--adjudicataria(_,_,Nif,_) :: (solucoes(Nif, contrato(IdC,_,Nif,_,_,_,_,_,_,_), R),
-                              comprimento(R, 0)).
++interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
++interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
-% Garantir que o nif da adjudicataria é válido
-+adjudicataria(_,_,Nif,_) :: (nifValido(Nif)).
+% Garantir que adjudicatarias com ids diferentes têm diferente informação
++adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,_,Morada), R), comprimento(R,1)).
++incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,_,Morada), R), comprimento(R,1)).
++interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,_,Morada), R), comprimento(R,1)).
+
+% Garantir que adjudicatarias com ids diferentes têm diferente informação para conhecimento perfeitonegativo
++(-adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), -adjudicataria(_,Nome,Nif,Morada), R), 
+									   comprimento(R,1)).									
+
+% Garantir que não é possível remover uma entidade adjudicataria com um contrato 
+-adjudicataria(_,_,Nif,_) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+-incerto(adjudicataria(_,_,Nif,_)) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+-interdito(adjudicataria(_,_,Nif,_)) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
+													
+% Garantir que o nif do adjudicataria é válido para conhecimento positivo
++adjudicataria(_,_,Nif,_) :: nifValido(Nif).
++(-adjudicataria(_,_,Nif,_)) :: nifValido(Nif).
++incerto(adjudicataria(Id,_,Nif,_)) ::(adjudicataria(Id,_,desconhecido,_) ;nifValido(Nif)).
++interdito(adjudicataria(Id,_,Nif,_)) ::(adjudicataria(Id,_,nif_interdito,_) ;nifValido(Nif)).

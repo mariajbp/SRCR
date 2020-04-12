@@ -186,30 +186,20 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Data),in
 evolucao(adjudicante(Id,Nome,Nif,Morada), interdito, nome ):-
         solucoes(Inv, +interdito(adjudicante(Id,nome_interdito,Nif,Morada)) :: Inv,Linv),
         insercao(adjudicante(Id, nome_interdito, Nif, Morada)),
-        insercao((+adjudicante(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicante(Id,N,Nif,Morada),nao(nulointerdito(N))),R),
-                        comprimento(R,0)))),
         teste(Linv).
 
 evolucao(adjudicante(Id,Nome,Nif,Morada), interdito, morada ):-
         solucoes(Inv, +interdito(adjudicante(Id,Nome,Nif,morada_interdita)) :: Inv,Linv),
         insercao(adjudicante(Id, Nome, Nif, morada_interdita)),
-        insercao((+adjudicante(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicante(Id,Nome,Nif,M),nao(nulointerdito(M))),R),
-                        comprimento(R,0)))),
         teste(Linv).
 %% Adjudicataria Interdita
 evolucao(adjudicataria(Id,Nome,Nif,Morada), interdito, nome ):-
         solucoes(Inv, +interdito(adjudicataria(Id,nome_interdito,Nif,Morada)) :: Inv,Linv),
         insercao(adjudicataria(Id, nome_interdito, Nif, Morada)),
-        insercao((+adjudicataria(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicataria(Id,N,Nif,Morada),nao(nulointerdito(N))),R),
-                        comprimento(R,0)))),
         teste(Linv).        
 evolucao(adjudicataria(Id,Nome,Nif,Morada), interdito, morada ):-
         solucoes(Inv, +interdito(adjudicataria(Id,Nome,Nif,morada_interdita)) :: Inv,Linv),
         insercao(adjudicataria(Id, Nome, Nif, morada_interdita)),
-        insercao((
-            +adjudicataria(A,B,C,D) :: ( solucoes( (A,B,C,D),(adjudicataria(Id,Nome,Nif,M),nao(nulointerdito(M))),R),
-                        comprimento(R,0))
-                    )),
         teste(Linv).
 
 --------- - - - - - - - - - -  -  -  -  -   -

@@ -54,3 +54,29 @@ demo(Q,desconhecido) :- nao(Q), nao(-Q).
 demoList([Q],[R]):- demo(R,S).
 demoList([Q|Qs],[R|Rs]) :- demo(Q,R), demoList(Qs,Rs).
 %%
+
+query([],verdadeiro).
+query([Q],R) :- demo(Q,R).
+query([Q1,'E'|Qs],R) :- demo(Q1,R1),
+                            queries(Qs,R2),
+                            conjuncao(R1,R2,R).
+query([Q1,'OU'|Qs],R) :- demo(Q1,R1),
+                           queries(Qs,R2),
+                           disjuncao(R1,R2,R).
+
+
+% Extensao do predicado conjuncao: X,Y -> {V,F,D}
+conjuncao(verdadeiro,verdadeiro,verdadeiro).
+conjuncao(verdadeiro,desconhecido,desconhecido).
+conjuncao(desconhecido,verdadeiro,desconhecido).
+conjuncao(desconhecido,desconhecido,desconhecido).
+conjuncao(falso,_,falso).
+conjuncao(_,falso,falso).
+
+% Extensao do predicado disjuncao: X,Y -> {V,F,D}
+disjuncao(verdadeiro,_,verdadeiro).
+disjuncao(_,verdadeiro,verdadeiro).
+disjuncao(falso,falso,falso).
+disjuncao(falso,desconhecido,desconhecido).
+disjuncao(desconhecido,falso,desconhecido).
+disjuncao(desconhecido,desconhecido,desconhecido).

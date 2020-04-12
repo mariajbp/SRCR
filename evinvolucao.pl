@@ -214,18 +214,16 @@ evolucao(adjudicataria(Id,Nome,Nif,Morada), interdito, morada ):-
         insercao(adjudicataria(Id, Nome, Nif, morada_interdita)),
         teste(Linv).
 
---------- - - - - - - - - - -  -  -  -  -   -
 
-% Remove   conhecimento na base de conhecimento
-involucao(T) :- involucao(T, positivo).
+involucao(I):-involucao(I,positivo).
 
 % Remove conhecimento perfeito positivo na base de conhecimento
-involucao(T, positivo) :- solucoes(Inv, +T :: Inv, Linv),
+involucao(T, positivo) :- solucoes(Inv, -T :: Inv, Linv),
                          remocao(T),
                          teste(Linv).
 
 % Remove conhecimento perfeito negativo na base de conhecimento
-involucao(T, negativo) :- solucoes(Inv, +(-T) :: Inv, Linv),
+involucao(T, negativo) :- solucoes(Inv, -(-T) :: Inv, Linv),
                          remocao(-T),
                          teste(Linv).
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -

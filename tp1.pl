@@ -15,7 +15,6 @@
 :- dynamic idAdjudicata/1.
 :- dynamic excecao/1.
 
-
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Carregar predicados do ficheiro no qual é guardado o estado
 
@@ -24,6 +23,25 @@
 :- include('evinvolucao.pl').
 :- include('invariantes.pl').
 
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Pressupostos Mundo Fechado
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+
+-contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT) :-
+    nao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT)),
+    nao(excecao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,DT))).
+
+-adjudicante(IdAd,Nome,Nif,Morada) :-
+    nao(adjudicante(IdAd,Nome,Nif,Morada)),
+    nao(excecao(adjudicante(IdAd,Nome,Nif,Morada))).
+
+-adjudicataria(IdAd,Nome,Nif,Morada) :-
+    nao(adjudicataria(IdAd,Nome,Nif,Morada)),
+    nao(excecao(adjudicataria(IdAd,Nome,Nif,Morada))).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Sistema de Inferencia
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 
 % Extensao do meta-predicado demo: Questao,Resposta -> {"verdadeiro","falso","desconhecido"}
 % capaz de responder a uma única questão

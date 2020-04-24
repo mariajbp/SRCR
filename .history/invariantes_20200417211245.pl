@@ -1,17 +1,14 @@
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-
 % Invariante que garante que não existe conhecimento perfeito positivo repetido
 +contrato(A,B,C,D,E,F,G,H,I,J)		:: (solucoes(A,contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1)).
 +adjudicante(A,B,C,D) 				:: (solucoes(A,adjudicante(A,B,C,D),L),comprimento(L,1)).
 +adjudicataria(A,B,C,D) 			:: (solucoes(A,adjudicataria(A,B,C,D),L),comprimento(L,1)).
-
 % Invariante que garante que não existe conhecimento perfeito negativo repetido
 +(-contrato(A,B,C,D,E,F,G,H,I,J)) 	:: (solucoes(A,-contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1)).
 +(-adjudicante(A,B,C,D)) 			:: (solucoes(A,-adjudicante(A,B,C,D),L),comprimento(L,1)).
 +(-adjudicataria(A,B,C,D)) 			:: (solucoes(A,-adjudicataria(A,B,C,D),L),comprimento(L,1)).
-
 % Invariante que garante que não existe conhecimento imperfeito generico repetido
 +imperfeito(CII) 						:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existe conhecimento imperfeito incerto repetido
@@ -22,12 +19,10 @@
 +interdito(CII) 					:: (solucoes(CII, excecao(CII), R),comprimento(R, 1)).
 % Invariante que garante que não existem excecoes repetidas
 +(excecao(E)) :: (solucoes(E, excecao(E), R), comprimento(R, 1)).
-
 % Invariante que não permite adicionar conhecimento perfeito positivo que contradiz conhecimento perfeito negativo
 +contrato(A,B,C,D,E,F,G,H,I,J)		:: nao((solucoes(A,-contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1))).
 +adjudicante(A,B,C,D) 				:: nao((solucoes(A,-adjudicante(A,B,C,D),L),comprimento(L,1))).
 +adjudicataria(A,B,C,D) 			:: nao((solucoes(A,-adjudicataria(A,B,C,D),L),comprimento(L,1))).
-
 % Invariante que não permite adicionar conhecimento perfeito negativo que contradiz conhecimento perfeito positivo
 +(-contrato(A,B,C,D,E,F,G,H,I,J)) 	:: nao((solucoes(A,contrato(A,B,C,D,E,F,G,H,I,J),L),comprimento(L,1))).
 +(-adjudicante(A,B,C,D)) 			:: nao((solucoes(A,adjudicante(A,B,C,D),L),comprimento(L,1))).
@@ -40,12 +35,10 @@
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
 +incerto(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
 +interdito(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
-
-% Garantir que contratos com ids diferentes têm diferente informacao
+% Contratos com ids diferentes têm diferente informacao
 +contrato(IdC,A,B,C,D,E,F,G,H,Data) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
 +incerto(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
 +interdito(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
-
 %Garantir que conhecimento perfeito não é imperfeito
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, excecao(contrato(IdC,_,_,_,_,_,_,_,_,_)),R),comprimento(R,0)).
 
@@ -64,14 +57,13 @@
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Ajuste Direto",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Consulta Previa",D,V,P,L,DT));
 																			excecao(contrato(IdC,IdAd,IdAda,TContrato,"Concurso Publico",D,V,P,L,DT))).
-
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
 +contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_) :: (V =< 5000).
 +incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,desconhecido,_,_,_)) ; (V =< 5000)).
 +impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: ((intervalo(V)) ; (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)), V =< 5000)).
 +interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,valor_interdito,_,_,_)) ; V =< 5000).
 
-%Garantir que um contrato por ajuste direto é um dos segintes: Contrato de aquisição ou locação de bens móveis ou aquisição de serviços
+%Garantir q.erviços ou desconhecido
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
 													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
    													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
@@ -86,13 +78,11 @@
 														   excecao(contrato(IdC,_,_,tipo_interdito,"Ajuste Direto",_,_,_,_,_));
 													  	   excecao(contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_));
    													       excecao(contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_))).														
-
 % Prazo de vigencia ate 1 ano
 +contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo=<365.
 +incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_)) 	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,desconhecido,_,_)) ; Prazo=<365).
 +impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (intervalo(Prazo);Prazo=<365).
 +interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_))	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,prazo_interdito,_,_));Prazo=<365).						
-
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data) :: (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
@@ -141,26 +131,26 @@
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Adjudicante
 
-%Garantir que o id e nif de cada entidade adjudicante é único para conhecimento perfeito positivo
+%%%%%%%T%%%%%%%%%O%%%%%%%%%%%%%%%D%%%%%%%%%%%%%%%%%%%%O%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Garantir que o id e nif de cada entidade adjudicante é único
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
 
-%Garantir que o id e nif de cada entidade adjudicante é único para conhecimento imperfeito incerto
 +incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
 +incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
 
-%Garantir que o id e nif de cada entidade adjudicante é único para conhecimento imperfeito interdito
 +interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicante(IdAd,_,_,_)),R), comprimento(R,1)).									
 +interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicante(_,_,Nif,_),R), comprimento(R,1)).
 
-% Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito positivo
+% Garantir que adjudicantes com ids diferentes têm diferente informação
 +adjudicante(IdAd,Nome,Nif,Morada) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
 +incerto(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
 +interdito(adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicante(_,Nome,_,Morada), R), comprimento(R,1)).
 
-% Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeito negativo
+% Garantir que adjudicantes com ids diferentes têm diferente informação para conhecimento perfeitonegativo
 +(-adjudicante(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), -adjudicante(_,Nome,Nif,Morada), R), 
-									      comprimento(R,1)).									
+									   comprimento(R,1)).									
 
 % Garantir que não é possível remover uma entidade adjudicataria com um contrato 
 -adjudicante(_,_,Nif,_) :: (solucoes(Nif, contrato(IdC,Nif,_,_,_,_,_,_,_,_), R),comprimento(R, 0)).
@@ -175,16 +165,13 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   - 
 % Invariantes Estruturais e Referenciais: Adjudicataria
-
-%Garantir que o id e nif de cada entidade adjudicataria é único para conhecimento perfeito positivo
+%Garantir que o id e nif de cada entidade adjudicataria é único
 +adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
 +adjudicataria(IdAd,Nome,Nif,Morada) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
-%Garantir que o id e nif de cada entidade adjudicataria é único para conhecimento imperfeito incerto
 +incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
 +incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
-%Garantir que o id e nif de cada entidade adjudicataria é único para conhecimento imperfeito interdito
 +interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(IdAd, (adjudicataria(IdAd,_,_,_)),R), comprimento(R,1)).									
 +interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes(Nif, adjudicataria(_,_,Nif,_),R), comprimento(R,1)).
 
@@ -193,7 +180,7 @@
 +incerto(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,_,Morada), R), comprimento(R,1)).
 +interdito(adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), adjudicataria(_,Nome,_,Morada), R), comprimento(R,1)).
 
-% Garantir que adjudicatarias com ids diferentes têm diferente informação para conhecimento perfeito negativo
+% Garantir que adjudicatarias com ids diferentes têm diferente informação para conhecimento perfeitonegativo
 +(-adjudicataria(IdAd,Nome,Nif,Morada)) :: (solucoes((Nome, Nif,Morada), -adjudicataria(_,Nome,Nif,Morada), R), 
 									   comprimento(R,1)).									
 

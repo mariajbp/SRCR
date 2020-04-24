@@ -108,6 +108,7 @@ adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita)
 
 
 
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Exceções para conhecimento imperfeito incerto
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -

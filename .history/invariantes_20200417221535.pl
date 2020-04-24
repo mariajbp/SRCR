@@ -41,7 +41,7 @@
 +incerto(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
 +interdito(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
 
-% Garantir que contratos com ids diferentes têm diferente informacao
+% Contratos com ids diferentes têm diferente informacao
 +contrato(IdC,A,B,C,D,E,F,G,H,Data) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
 +incerto(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
 +interdito(contrato(IdC,A,B,C,D,E,F,G,H,Data)) :: (solucoes(IdC, contrato(_,A,B,C,D,E,F,G,H,Data) ,R) ,comprimento(R,1)).
@@ -71,7 +71,7 @@
 +impreciso(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: ((intervalo(V)) ; (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)), V =< 5000)).
 +interdito(contrato(IdC,_,_,_,"Ajuste Direto",_,V,_,_,_)) :: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,valor_interdito,_,_,_)) ; V =< 5000).
 
-%Garantir que um contrato por ajuste direto é um dos segintes: Contrato de aquisição ou locação de bens móveis ou aquisição de serviços
+%Garantir q.erviços ou desconhecido
 +contrato(IdC,_,_,TContrato,"Ajuste Direto",_,_,_,_,_) :: (contrato(IdC,_,_,"Aquisicao","Ajuste Direto",_,_,_,_,_);
 													  	   contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_);
    													       contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_)).
@@ -86,7 +86,6 @@
 														   excecao(contrato(IdC,_,_,tipo_interdito,"Ajuste Direto",_,_,_,_,_));
 													  	   excecao(contrato(IdC,_,_,"Locacao de bens moveis","Ajuste Direto",_,_,_,_,_));
    													       excecao(contrato(IdC,_,_,"Aquisicao de servicos","Ajuste Direto",_,_,_,_,_))).														
-
 % Prazo de vigencia ate 1 ano
 +contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_) :: Prazo=<365.
 +incerto(contrato(IdC,_,_,_,"Ajuste Direto",_,_,Prazo,_,_)) 	:: (excecao(contrato(IdC,_,_,_,"Ajuste Direto",_,_,desconhecido,_,_)) ; Prazo=<365).

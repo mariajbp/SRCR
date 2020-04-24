@@ -49,17 +49,20 @@ demo(Q,verdadeiro) :- Q.
 demo(Q,falso) :- -Q.
 demo(Q,desconhecido) :- nao(Q), nao(-Q).
 
-% Extensao do meta-predicado demoList: [Questao],[Resposta] -> {V,F,D}
+% Extensao do meta-predicado siLista: [Questao],[Resposta] -> {V,F,D}
 % capaz de responder a várias questões em simultâneo
 demoList([Q],[R]):- demo(R,S).
 demoList([Q|Qs],[R|Rs]) :- demo(Q,R), demoList(Qs,Rs).
+%%
 
-% Extensao do meta-predicado query: [Questao], Resposta -> {V,F,D}
-% capaz de fazer a conjunção e/ou disjunção de uma lista de questões
 query([],verdadeiro).
 query([Q],R) :- demo(Q,R).
-query([Q1,'E'|Qs],R) :- demo(Q1,R1), query(Qs,R2), conjuncao(R1,R2,R).
-query([Q1,'OU'|Qs],R) :- demo(Q1,R1), query(Qs,R2), disjuncao(R1,R2,R).
+query([Q1,'E'|Qs],R) :- demo(Q1,R1),
+                            queries(Qs,R2),
+                            conjuncao(R1,R2,R).
+query([Q1,'OU'|Qs],R) :- demo(Q1,R1),
+                           queries(Qs,R2),
+                           disjuncao(R1,R2,R).
 
 
 % Extensao do predicado conjuncao: X,Y -> {V,F,D}

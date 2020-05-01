@@ -45,9 +45,10 @@ menos3Anos(data(_,_,NYDt),data(_,_,NYData)):- SubY is NYData - NYDt,!, SubY =< 3
 % Soma de valores 
 sumVals([V],V).
 sumVals([Vl|T],Ret):- sumVals(T,Ret2), Ret is Ret2+Vl.
-
 %data Valida
-dataValida(data(D,M,A)):-anoValido(A),mesValido(M),diaValido(D).
+dataValida(data(D,M,A)):-((flagImperfeito(A);anoValido(A)),
+                         (flagImperfeito(M); mesValido(M)),
+                         (flagImperfeito(D);diaValido(D))).
 % dia válido
 diaValido(Dia) :- Dia >= 1, Dia =< 31.
 % mes válido
@@ -55,6 +56,8 @@ mesValido(M) :- M >= 1, M =< 12.
 % ano válido
 anoValido(A) :- A >= 0, A =< 2020.
 
+flagImperfeito(desconhecido).
+flagImperfeito(F):-nulointerdito(F).
 anoImperfeito(A):-nulointerdito(A).
 anoImperfeito(desconhecido).
 anoImperfeito(data(_,_,A)):-nulointerdito(A).

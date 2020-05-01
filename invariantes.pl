@@ -35,7 +35,11 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Invariantes Estruturais e Referenciais: Contrato
-
+%Data Valida
++contrato(_,_,_,_,_,_,_,_,_,Data):- dataValida(Data).
++incerto(contrato(_,_,_,_,_,_,_,_,_,_,D)):-dataValida(D).
++interdito(contrato(_,_,_,_,_,_,_,_,_,_,D)):-dataValida(D).
++imperfeito(contrato(_,_,_,_,_,_,_,_,_,_,D)):-dataValida(D).
 %Garantir que não há 2 contratos com ids iguais
 +contrato(IdC,_,_,_,_,_,_,_,_,_) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).
 +incerto(contrato(IdC,_,_,_,_,_,_,_,_,_)) :: (solucoes(IdC, contrato(IdC,_,_,_,_,_,_,_,_,_) ,R), comprimento(R,1)).

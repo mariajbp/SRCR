@@ -2,7 +2,6 @@
 evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 involucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 
-involucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020)), positivo).
 %no
 evolucao(contrato(20,123456789,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 
@@ -11,7 +10,7 @@ evolucao(adjudicante(21,nome,123456789,morada)).
 involucao(adjudicante(21,nome,123456789,morada)).
 
 evolucao(adjudicataria(21,nome,987654321,morada)).
-involucao(adjudicataria(21,nome,123456789,morada)).
+involucao(adjudicataria(21,nome,987654321,morada)).
 
 
 % ------------------------------- Insere conhecimento imperfeito incerto 
@@ -46,6 +45,7 @@ involucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto
 
 %%data
 evolucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), incerto, data).
+involucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), incerto, data).
 
 %% ---------- adjudicante & adjudicataria
 
@@ -62,22 +62,21 @@ evolucao(contrato(40,600018709,502381973,idk,"Ajuste Direto","desc",340,25,"loca
 involucao(contrato(40,600018709,502381973,idk,"Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
 
 %yes
-evolucao(contrato(40,600218719,501181973,i,"Consulta Previa",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
-
+evolucao(contrato(45,600018709,502381973,idk,"Consulta Previa",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
 
 evolucao(contrato(35,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, tipoprocedimento).
-involucao(contrato(35,600018709,502381973,"Aquisicao de servicos",idk,desc,340,25,local,data(1,1,2020)),impreciso, tipoprocedimento).
+involucao(contrato(35,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, tipoprocedimento).
 
 evolucao(contrato(36,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, descricao).
 involucao(contrato(36,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, descricao).
 
 %%prazos
-evolucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,-1,25,local,data(1,1,2020)),impreciso, valor).
-involucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,-1,25,local,data(1,1,2020)), impreciso, valor).
+evolucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,0,25,local,data(1,1,2020)),impreciso, valor).
+involucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,0,25,local,data(1,1,2020)), impreciso, valor).
 
 
-evolucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,-1,local,data(1,1,2020)),impreciso, prazo).
-involucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,-1,local,data(1,1,2020)), impreciso, prazo).
+evolucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,0,local,data(1,1,2020)),impreciso, prazo).
+involucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,0,local,data(1,1,2020)), impreciso, prazo).
 
 
 evolucao(contrato(39,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, local).
@@ -97,6 +96,8 @@ involucao(adjudicante(20,wtv,987654321,morada), impreciso, nome).
 
 involucao(adjudicante(21,wtv,123456789,morada), impreciso, morada).
 
+evolucao(adjudicataria(20,wtv,987654321,morada), impreciso, nome).
+involucao(adjudicataria(20,wtv,987654321,morada), impreciso, nome).
 
 % ------------------------------- Insere conhecimento imperfeito interdito 
 % Id,IdAd, IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Valor, Prazo, Local, Data -> {V,F,D}

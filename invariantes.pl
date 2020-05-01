@@ -96,23 +96,24 @@
 %Regra dos 3 anos válida para todos os contratos
 +contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data) :: (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
-																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)),
+																											nao(anoImperfeito(Dt)),
+																											nao(contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,desconhecido)),
 																											menos3Anos(Dt,Data)
 																									),L),
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000).
 +incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)) ::(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,desconhecido,Prazo,Local,Data);
-																							contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,desconhecido);
 																					 (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
-																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)) ,
+																											nao(anoImperfeito(Dt)),
+																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)),
 																											menos3Anos(Dt,Data)),L),
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000)).
 +interdito(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)) ::(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,valor_interdito,Prazo,Local,Data);
-																							contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,data_interdita);
 																					 (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
+																											nao(anoImperfeito(Dt)),
 																											nao(contrato(_,IdAd,IdAda,_,_,_,desconhecido,_,_,Dt)) ,
 																											menos3Anos(Dt,Data)),L),
                                                                                        sumVals([-Val|L],Ret),

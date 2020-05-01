@@ -24,7 +24,7 @@ insercao(Q) :- assert(Q).
 insercao(Q) :- retract(Q), !, fail.
 
 % Remoção de conhecimento
-remocao(Q) :- retract(Q).
+remocao(Q) :- Q , retract(Q).
 remocao(Q) :- assert(Q), !, fail.
 
 % Testa se todos os predicados são verdadeiros

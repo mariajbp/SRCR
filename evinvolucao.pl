@@ -261,7 +261,7 @@ evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,A)) ,
     teste(Linv).
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma data desconhecida
 evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,A)) , interdito, dataMes) :-
-    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Didata_interdita,A))) :: Inv, Linv),
+    solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,data_interdita,A))) :: Inv, Linv),
     insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,data_interdita,A))),
     teste(Linv).
 % Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma data desconhecida
@@ -571,7 +571,7 @@ involucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,A)) 
     teste(Linv).
 % Remove conhecimento imperfeito incerto na base de conhecimento de um contrato com uma data desconhecida
 involucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,A)) , interdito, dataAno) :-
-    solucoes(Inv,-incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,data_))) :: Inv, Linv),
+    solucoes(Inv,-incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,data_interdita))) :: Inv, Linv),
     contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,data_interdita)),
     remocao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,data_interdita))),
     teste(Linv).

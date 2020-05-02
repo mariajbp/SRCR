@@ -30,7 +30,7 @@ remocao(Q) :- assert(Q), !, fail.
 % Testa se todos os predicados são verdadeiros
 teste([]).
 teste([I|L]) :- I, teste(L).
-teste([I|L]):- nao(I),!, write('\n INV BROKEN: ') ,write(I), fail.
+%teste([I|L]):- nao(I),!, write('\n INV BROKEN: ') ,write(I), fail.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 
@@ -59,7 +59,8 @@ anoValido(A) :- A >= 0, A =< 2020.
 
 flagImperfeito(desconhecido).
 flagImperfeito(F):-nulointerdito(F).
-anoImperfeito(A):-nulointerdito(A).
+
+anoImperfeito(A):- nulointerdito(A).
 anoImperfeito(desconhecido).
-anoImperfeito(data(_,_,A)):-nulointerdito(A).
+anoImperfeito(data(_,_,A)):- nulointerdito(A).
 anoImperfeito(data(_,_,desconhecido)).

@@ -81,4 +81,3 @@ disjuncao(desconhecido,desconhecido,desconhecido).
 
 
 %--------------------------------------------------------------------
-mat(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,D)):- assert(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,D)).

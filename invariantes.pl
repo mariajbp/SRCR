@@ -107,6 +107,7 @@
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000).
 +incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)) ::(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,desconhecido,Prazo,Local,Data);
+																							anoImperfeito(Data);
 																					 (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
 																											nao(anoImperfeito(Dt)),
@@ -115,6 +116,7 @@
                                                                                        sumVals([-Val|L],Ret),
                                                                                        Ret<75000)).
 +interdito(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,Val,Prazo,Local,Data)) ::(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,Descricao,valor_interdito,Prazo,Local,Data);
+																								anoImperfeito(Data);
 																					 (solucoes(Vl, (contrato(_,IdAd,IdAda,_,_,_,Vl,_,_,Dt),
 																											nao(nulointerdito(Vl)),
 																											nao(anoImperfeito(Dt)),

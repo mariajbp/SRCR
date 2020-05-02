@@ -59,7 +59,7 @@ evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,Data_desconheci
     solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,desconhecido)) :: Inv, Linv),
     insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,desconhecido)),
     teste(Linv).
-% Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com uma dia desconhecida
+% Insere conhecimento imperfeito incerto na base de conhecimento de um contrato com um dia desconhecido
 evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(D,M,A)) , incerto, dataDia) :-
     solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(desconhecido,M,A))) :: Inv, Linv),
     insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(desconhecido,M,A))),

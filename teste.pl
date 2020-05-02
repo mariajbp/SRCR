@@ -64,31 +64,29 @@ involucao(contrato(40,600018709,502381973,idk,"Ajuste Direto",desc,340,25,local,
 %yes
 evolucao(contrato(45,600018709,502381973,idk,"Consulta Previa",desc,340,25,local,data(1,1,2020)),impreciso, tipocontrato).
 
-//erro
 evolucao(contrato(35,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, tipoprocedimento).
 involucao(contrato(35,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, tipoprocedimento).
 
-//erro
+
 evolucao(contrato(36,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, descricao).
 involucao(contrato(36,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, descricao).
 
-//erros
+
 %%prazos
 evolucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,0,25,local,data(1,1,2020)),impreciso, valor).
 involucao(contrato(37,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,0,25,local,data(1,1,2020)), impreciso, valor).
 
-//erro
 evolucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,0,local,data(1,1,2020)),impreciso, prazo).
 involucao(contrato(38,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,20,0,local,data(1,1,2020)), impreciso, prazo).
 
-//erro
+
 evolucao(contrato(39,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)), impreciso, local).
 involucao(contrato(39,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),  impreciso, local).
 
-//erros
+
 %%data
 evolucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), impreciso, data).
-Invólucro(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), impreciso, data).
+involucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), impreciso, data).
 
 %no 
 evolucao(contrato(40,123456789,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(-1,-1,-1)), impreciso, data).
@@ -163,6 +161,13 @@ involucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,340,2
 
 
 
+%%conhecimento interdito :YES
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,340,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+involucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,340,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+
+
+
+
 %Garantir que o valor do contrato por ajuste direto é igual ou inferior a 5000 euros
 
 %%conhecimento perfeito: YES
@@ -177,8 +182,22 @@ evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,34000,
 involucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,34000,25,local,data(1,1,2020)),incerto, tipoprocedimento).
 
 %%conhecimento incerto :YES
-evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,34000,25,local,data(1,1,2020)),incerto, valor).
-involucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,34000,25,local,data(1,1,2020)),incerto, valor).
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,idk,25,local,data(1,1,2020)),incerto, valor).
+involucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,idk,25,local,data(1,1,2020)),incerto, valor).
+
+
+%%conhecimento impreciso :YES
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, valor).
+involucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),impreciso, valor).
+
+
+%%conhecimento interdito :YES
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,34000,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+involucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,34000,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+
+%%conhecimento interdito :YES
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),interdito, valor).
+involucao(contrato(30,600018709,502381973,"Aquisicao de servicos","Ajuste Direto",desc,340,25,local,data(1,1,2020)),interdito, valor).
 
 
 
@@ -203,6 +222,11 @@ evolucao(contrato(30,600018709,502381973,idk,idk,desc,340,25,local,data(1,1,2020
 involucao(contrato(30,600018709,502381973,idk,idk,desc,340,25,local,data(1,1,2020)),incerto, tipoprocedimento).
 
 
+%%conhecimento interdito :YES
+evolucao(contrato(30,600018709,502381973,idk,idk,desc,340,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+involucao(contrato(30,600018709,502381973,idk,idk,desc,340,25,local,data(1,1,2020)),interdito, tipoprocedimento).
+
+
 
 
 
@@ -219,21 +243,77 @@ evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 40
 evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,idk,local,data(1,1,2020)),incerto, prazo).
 involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,idk,local,data(1,1,2020)),incerto, prazo).
 
-evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,340,25,local,data(1,1,2020)),impreciso, tipoprocedimento).
+
+%%conhecimento impreciso :YES
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,2,local,data(1,1,2020)),impreciso, prazo).
+involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,2,local,data(1,1,2020)),impreciso, prazo).
+
+
+%%conhecimento interdito :YES
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,2,local,data(1,1,2020)),interdito, prazo).
+involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,2,local,data(1,1,2020)),interdito, prazo).
+
+
+
+
+
+
 
 
 
 %Regra dos 3 anos válida para todos os contratos
-%%conhecimento perfeito: YES
-evolucao(contrato(21,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
+
+%%conhecimento perfeito: YES (o segundo contrato dá yes) -mais do que 3 anos:
 
 evolucao(contrato(20,600018709,502381973, "Aquisicao","Consulta Previa","desc", 760000, 195, "Lisboa", data(19,03,2020))).
+evolucao(contrato(21,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2024))).
+--------------------------------------------------------
+%%conhecimento perfeito: YES (o segundo contrato dá yes) - menos que 75000:
+
+evolucao(contrato(26,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
+evolucao(contrato(27,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(18,03,2020))).
+
+
+%%conhecimento perfeito: NO (o segundo contrato dá não)
+evolucao(contrato(22,600018709,502381973, "Aquisicao","Consulta Previa","desc", 760000, 195, "Lisboa", data(19,03,2020))).
+evolucao(contrato(23,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
+
+
+
+//erro
+%%conhecimento incerto :YES
+
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,idk,idk)),incerto, data).
+evolucao(contrato(32,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,2,2020)),incerto, dataDia).
+evolucao(contrato(33,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,idk,2024)),incerto, dataMes).
+evolucao(contrato(34,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,2,idk)),incerto, dataAno).
+
+//erro
+%%conhecimento impreciso :YES
+
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,idk,idk)),impreciso, data).
+evolucao(contrato(32,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,2,2020)),impreciso, dataDia).
+evolucao(contrato(33,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,idk,2024)),impreciso, dataMes).
+evolucao(contrato(34,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,2,idk)),impreciso, dataAno).
+
+//erro
+%%conhecimento interdito :YES
+
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,idk,idk)),interdito, data).
+evolucao(contrato(32,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124000,local,data(idk,2,2020)),interdito, dataDia).
+evolucao(contrato(33,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,idk,2024)),interdito, dataMes).
+evolucao(contrato(34,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,124,local,data(1,2,idk)),interdito, dataAno).
 
 
 %demo
 demo(adjudicante(1, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"),verdadeiro).
 demo(adjudicante(2, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"),falso).
 %demoList
+
+
+
+
+
 
 
 

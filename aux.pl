@@ -30,6 +30,7 @@ remocao(Q) :- assert(Q), !, fail.
 % Testa se todos os predicados são verdadeiros
 teste([]).
 teste([I|L]) :- I, teste(L).
+teste([I|L]):- nao(I),!, write('\n INV BROKEN: ') ,write(I), fail.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 

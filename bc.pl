@@ -120,6 +120,9 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,I
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,desconhecido,Local,Data).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,desconhecido,Data).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,desconhecido).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(desconhecido,M,A)).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,desconhecido,A)).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,desconhecido)).
 
 % ---- Exceções do predicado Adjudicante
 excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,desconhecido,Nif,Morada).
@@ -142,6 +145,9 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,I
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,prazo_interdito,Local,Data).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,local_interdito,Data).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data)) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data_interdita).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(data_interdita,M,A)).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,data_interdita,A)).
+excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,data_interdita)).
 
 +contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data) :: (solucoes((Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data),
                                                          (contrato(Id,_,_,TC,TP,Desc,Val,P,Local,Data), (nulointerdito(TC);

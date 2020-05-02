@@ -14,6 +14,7 @@
 :- dynamic idAdjud/1.
 :- dynamic idAdjudicata/1.
 :- dynamic excecao/1.
+:-dynamic data/3.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Carregar predicados do ficheiro no qual é guardado o estado
@@ -77,3 +78,7 @@ disjuncao(falso,falso,falso).
 disjuncao(falso,desconhecido,desconhecido).
 disjuncao(desconhecido,falso,desconhecido).
 disjuncao(desconhecido,desconhecido,desconhecido).
+
+
+%--------------------------------------------------------------------
+mat(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,D)):- assert(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,D)).

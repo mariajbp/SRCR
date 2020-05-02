@@ -27,10 +27,6 @@ excecao(contrato(11,600086992, 503188620, "Locacao de bens moveis", "Concurso Pu
 %É impossivel saber o valor do contrato
 contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valor_interdito, 352, data(14,01,2020)).
 
-+contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),(
-                                                         contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valor_interdito, 352, data(14,01,2020)),
-                                                         nao(nulointerdito(valor_interdito))),R), comprimento(R,0)).
-
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicante: IdAd, Nome, NIF, Morada -> {V,F,D}
 
@@ -61,10 +57,6 @@ excecao(adjudicante(4, "Universidade do Minho", 502011378, "Guimaraes")).
 %É impossivel saber a nome da entidade
 adjudicante(6, nome_interdito, 501413197, "Porto").
 excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
-
-+adjudicante(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
-                                     (adjudicante(6,Nom, 501413197, "Porto"),
-                                     nao(nulointerdito(Nom))), R), comprimento(R,0)). 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicato adjudicataria: IdAda, Nome, NIF, Morada -> {V,F,D}
@@ -98,10 +90,10 @@ excecao(adjudicataria(2, "Carlos Manuel Pires", 809589087, "Mirandela")).
 
 %É impossivel saber a morada da entidade
 adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita).
-
-+adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
-                                       (adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita),
-                                       nao(nulointerdito(morada_interdita))), R), comprimento(R,0)).
+% Representação da representaçao do invariante de exclusividade mutua na base de conhecimento
+%+adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
+%                                       (adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita),
+%                                       nao(nulointerdito(morada_interdita))), R), comprimento(R,0)).
 
 
 
@@ -147,6 +139,7 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(I
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,data_interdita,A)).
 excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,data_interdita)).
 
+%Invariante de exclusao mutua do conhecimento interdito e não interdito
 +contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data) :: (solucoes((Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,Data),
                                                          (contrato(Id,_,_,TC,TP,Desc,Val,P,Local,Data), (nulointerdito(TC);
                                                                                                          nulointerdito(P);
@@ -162,11 +155,27 @@ excecao(contrato(Id,IdA,IdAda,TC,TP,Desc,Val,P,Local,data(D,M,A))) :- contrato(I
 excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,nome_interdito,Nif,Morada).
 excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_interdita).
 
++adjudicante(Id,Nome,Nif,Morada) :: (solucoes(adjudicante(Id,Nome,Nif,Morada),
+                                      (adjudicante(_,Nome,_,Morada), (nulointerdito(Nome); nulointerdito(Morada))),
+                                      R),
+                                                        comprimento(R,0)).
+
+
+
 % ---- Exceções do predicado Adjudicataria
 excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Nif,Morada).
 excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_interdita).
 
++adjudicataria(Id,Nome,Nif,Morada) :: (solucoes(adjudicataria(Id,Nome,Nif,Morada),
+                                                         (adjudicataria(_,Nome,_,Morada), (nulointerdito(Nome);
+                                                                                            nulointerdito(Morada)
+                                                                                                         )),
+                                                          R),
+                                                        comprimento(R,0)).
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Flags de conhecimento interdito
 nulointerdito(tc_interdito).
 nulointerdito(tp_interdito).
 nulointerdito(descricao_interdita).
@@ -178,4 +187,5 @@ nulointerdito(data_interdita).
 nulointerdito(nome_interdito).
 nulointerdito(morada_interdita).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Flag de valor representado por um intervalo
 intervalo(range).

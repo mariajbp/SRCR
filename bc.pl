@@ -26,7 +26,7 @@ excecao(contrato(11,600086992, 503188620, "Locacao de bens moveis", "Concurso Pu
 
 %É impossivel saber o valor do contrato
 contrato(12,508481287,508592909, "Aquisicao de bens moveis", "Consulta Previa", "Aquisicao de seringas", valor_interdito, 352, data(14,01,2020)).
-excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- contrato(contrato(Id,IdA,IdAda,Tc,TP,Desc,valor_interdito,Pr,Local,Data)).
+excecao(contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data)) :- (contrato(Id,IdA,IdAda,Tc,TP,Desc,valor_interdito,Pr,Local,Data)).
 
 
 +contrato(Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data) :: (solucoes((Id,IdA,IdAda,Tc,TP,Desc,Val,Pr,Local,Data),(

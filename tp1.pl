@@ -5,7 +5,7 @@
 
 :- set_prolog_flag(discontiguous_warnings,off).
 :- set_prolog_flag(single_var_warnings,off).
-:- set_prolog_flag(unknown,fail).
+%:- set_prolog_flag(unknown,fail).
 
 :- op(900,xfy,'::').
 :- dynamic adjudicante/4.
@@ -51,7 +51,7 @@ demo(Q,desconhecido) :- nao(Q), nao(-Q).
 
 % Extensao do meta-predicado demoList: [Questao],[Resposta] -> {V,F,D}
 % capaz de responder a várias questões em simultâneo
-demoList([Q],[R]):- demo(R,S).
+demoList([Q],[R]):- demo(Q,R).
 demoList([Q|Qs],[R|Rs]) :- demo(Q,R), demoList(Qs,Rs).
 
 % Extensao do meta-predicado query: [Questao], Resposta -> {V,F,D}

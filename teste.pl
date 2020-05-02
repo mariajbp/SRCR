@@ -219,7 +219,7 @@ evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 40
 evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,idk,local,data(1,1,2020)),incerto, prazo).
 involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,idk,local,data(1,1,2020)),incerto, prazo).
 
-
+evolucao(contrato(30,600018709,502381973,"Aquisicao de servicos",idk,desc,340,25,local,data(1,1,2020)),impreciso, tipoprocedimento).
 
 
 
@@ -230,7 +230,10 @@ evolucao(contrato(21,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 40
 evolucao(contrato(20,600018709,502381973, "Aquisicao","Consulta Previa","desc", 760000, 195, "Lisboa", data(19,03,2020))).
 
 
-
+%demo
+demo(adjudicante(1, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"),verdadeiro).
+demo(adjudicante(2, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"),falso).
+%demoList
 
 
 

@@ -75,6 +75,8 @@ evolucao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,A)) ,
     solucoes(Inv,+incerto(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,desconhecido))) :: Inv, Linv),
     insercao(contrato(IdC,IdAd,IdAda,TContrato,TProcedimento,D,V,P,L,data(Di,M,desconhecido))),
     teste(Linv).
+
+
 %--- Adjudicante 
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicante com um nome desconhecido
@@ -82,7 +84,6 @@ evolucao(adjudicante(IdAd,Nome,Nif,Morada), incerto, nome) :-
     solucoes(Inv,+incerto(adjudicante(IdAd,desconhecido,Nif,Morada)) :: Inv, Linv),
     insercao(adjudicante(IdAd,desconhecido,Nif,Morada)),
     teste(Linv).
-
 
 % Insere conhecimento imperfeito incerto na base de conhecimento de um adjudicante com uma morada desconhecida
 evolucao(adjudicante(IdAd,Nome,Nif,Morada), incerto, morada) :-
@@ -169,7 +170,6 @@ evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT),impr
 
 
 
-
 % Insere conhecimento imperfeito impreciso na base de conhecimento de um contrato com um intervalo de valores
 evolucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT), impreciso, valor, LimiteInferior, LimiteSuperior) :-
     insercao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Val,P,L,DT)) :-
@@ -191,6 +191,7 @@ evolucao(adjudicante(IdAd,Nome,Nif,M),impreciso,nome):-
     solucoes(Inv, +impreciso(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
     insercao(excecao(adjudicante(IdAd,Nome,Nif,M))) ,
     teste(Linv).
+
 % Insere conhecimento imperfeito impreciso na base de conhecimento de um adjudicante com morada imprecisa
 evolucao(adjudicante(IdAd,Nome,Nif,M),impreciso,morada):-
     solucoes(Inv, +impreciso(adjudicante(IdAd,Nome,Nif,M)) :: Inv,Linv),
@@ -483,6 +484,7 @@ involucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,DT), im
     Pr >= LimiteInferior, Pr =< LimiteSuperior),
     remocao((excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,Pr,L,DT)) :-
                       Pr >= LimiteInferior, Pr =< LimiteSuperior)).
+                    
 involucao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,Dt), impreciso, data, data(Di,Mi,Ai), data(Ds,Ms,As)) :-
     (excecao(contrato(IdC,IdAd,IdAda,TipoContrato,TProcedimento,D,Valor,P,L,data(D,M,A))) :-
     ((A > Ai);(A==Ai,(M>Mi;(M==Mi,D>=Di)))),((A < As);(A==As,(M<Ms;(M==Ms,D=<Ds))))),

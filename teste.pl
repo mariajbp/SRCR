@@ -2,6 +2,12 @@
 evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 involucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 
+evolucao(-(adjudicante(21,nome,123456789,morada), negativo)).
+
+evolucao(-contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020)), negativo).
+
+evolucao(-(adjudicataria(21,nome,123456789,morada), negativo)).
+
 %no
 evolucao(contrato(20,123456789,502381973, "Aquisicao","Ajuste Direto","desc", 4000, 195, "Lisboa", data(19,03,2020))).
 
@@ -15,7 +21,7 @@ involucao(adjudicataria(21,nome,987654321,morada)).
 
 % ------------------------------- Insere conhecimento imperfeito incerto 
 %yes
-evolucao(contrato(31,600018709,502381973,idk,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)), incerto, tipocontrato).
+evolucao(contrato(31,600018709,502381973,desconhecido,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)), incerto, tipocontrato).
 involucao(contrato(31,600018709,502381973,idk,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)),incerto, tipocontrato).
 %no
 evolucao(contrato(15,123456789,502381973,idk,"Ajuste Direto","desc",340,25,"local",data(1,1,2020)), incerto, tipocontrato). 
@@ -50,11 +56,11 @@ involucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto
 
 %% ---------- adjudicante & adjudicataria
 
-evolucao(adjudicante(20,wtv,987654321,morada), incerto, nome).
-involucao(adjudicante(20,wtv,987654321,morada), incerto, nome).
+evolucao(adjudicante(20,desconhecido,987654321,morada), incerto, nome).
+involucao(adjudicante(20,desconhecido,987654321,morada), incerto, nome).
 
-evolucao(adjudicante(20,wtv,987654321,morada), incerto, morada).
-involucao(adjudicante(20,wtv,987654321,morada), incerto, morada).
+evolucao(adjudicante(21,nome,123456789,desconhecido), incerto, morada).
+involucao(adjudicante(21,nome,123456789,desconhecido), incerto, morada).
 
 % ------------------------------- Insere conhecimento imperfeito impreciso 
 % Id,IdAd, IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Valor, Prazo, Local, Data -> {V,F,D}
@@ -95,14 +101,14 @@ evolucao(contrato(40,123456789,502381973,"Aquisicao de servicos","Ajuste Direto"
 
 %% ---------- adjudicante & adjudicataria
 
-evolucao(adjudicante(20,wtv,987654321,morada), impreciso, nome).
-involucao(adjudicante(20,wtv,987654321,morada), impreciso, nome).
+evolucao(adjudicante(20,impreciso,987654321,morada), impreciso, nome).
+involucao(adjudicante(20,impreciso,987654321,morada), impreciso, nome).
 
 %%no
 involucao(adjudicante(21,wtv,123456789,morada), impreciso, morada).
 
-evolucao(adjudicataria(20,wtv,987654321,morada), impreciso, nome).
-involucao(adjudicataria(20,wtv,987654321,morada), impreciso, nome).
+evolucao(adjudicataria(22,impreciso,987654321,morada), impreciso, nome).
+involucao(adjudicataria(22,impreciso,987654321,morada), impreciso, nome).
 
 % ------------------------------- Insere conhecimento imperfeito interdito 
 % Id,IdAd, IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Valor, Prazo, Local, Data -> {V,F,D}
@@ -135,11 +141,11 @@ involucao(contrato(40,600018709,502381973,"Aquisicao de servicos","Ajuste Direto
 %% ---------- adjudicante
 
 %yes
-evolucao(adjudicante(20,wtv,987654321,morada), interdito, nome).
-involucao(adjudicante(20,wtv,987654321,morada), interdito, nome).
+evolucao(adjudicante(20,desconhecido,987654321,morada), interdito, nome).
+involucao(adjudicante(20,desconhecido,987654321,morada), interdito, nome).
 %yes
-evolucao(adjudicante(21,wtv,123456789,morada), interdito, morada).
-involucao(adjudicante(21,wtv,123456789,morada), interdito, morada).
+evolucao(adjudicataria(21,nome,123456789,desconhecido), interdito, morada).
+involucao(adjudicataria(21,nome,123456789,desconhecido), interdito, morada).
 %no
 evolucao(adjudicante(20,wtv,600018709,morada), interdito, nome).
 
@@ -261,11 +267,6 @@ involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,340,2
 
 
 
-
-
-
-
-
 %Regra dos 3 anos válida para todos os contratos
 
 %%conhecimento perfeito: YES (o segundo contrato dá yes) -mais do que 3 anos:
@@ -311,8 +312,8 @@ involucao(contrato(35,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,
 
 %%conhecimento interdito :YES
 
-evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(idk,idk,idk)),interdito, data).
-involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(idk,idk,idk)),interdito, data).
+evolucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(desconhecido,desconhecido,desconhecido)),interdito, data).
+involucao(contrato(31,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(desconhecido,desconhecido,desconhecido)),interdito, data).
 evolucao(contrato(32,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(idk,2,2020)),interdito, dataDia).
 involucao(contrato(32,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(idk,2,2020)),interdito, dataDia).
 evolucao(contrato(33,600018709,502381973,"Aquisicao","Ajuste Direto",desc,1240,340,local,data(1,idk,2024)),interdito, dataMes).
@@ -335,14 +336,13 @@ query([adjudicante(1, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"
 query([adjudicante(1, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa"), 'OU', adjudicante(2, "Direcao-Geral do Tribunal de Contas", 600018709, "Lisboa")],X ).
 
 
+%%
+evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 3000, 195, "Lisboa", data(19,03,2020)), impreciso, prazo, 200, 300).
+
+evolucao(contrato(20,600018709,502381973, "Aquisicao","Ajuste Direto","desc", 3000, 195, "Lisboa", data(19,03,2020)), data(26,03,2020)).
 
 
-
-
-
-
-
-
+evolucao(contrato(25,600018709,502381973, "Aquisicao","Ajuste Direto","desc", idk, 195, "Lisboa", data(19,03,2020)), impreciso, valor, 200, 300).
 
 
 

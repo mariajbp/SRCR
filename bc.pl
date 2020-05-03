@@ -90,6 +90,7 @@ excecao(adjudicataria(2, "Carlos Manuel Pires", 809589087, "Mirandela")).
 
 %É impossivel saber a morada da entidade
 adjudicataria(5, "Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita).
+
 % Representação da representaçao do invariante de exclusividade mutua na base de conhecimento
 %+adjudicataria(Id,Nome,Nif,Morada) :: (solucoes((Id,Nome,Nif,Morada), 
 %                                       (adjudicataria(5,"Manuel Rui Azinhais Nabeiro Lda", 500853975, morada_interdita),
@@ -157,8 +158,7 @@ excecao(adjudicante(Id,Nome,Nif,Morada)) :- adjudicante(Id,Nome,Nif,morada_inter
 
 +adjudicante(Id,Nome,Nif,Morada) :: (solucoes(adjudicante(Id,Nome,Nif,Morada),
                                       (adjudicante(_,Nome,_,Morada), (nulointerdito(Nome); nulointerdito(Morada))),
-                                      R),
-                                                        comprimento(R,0)).
+                                      R),comprimento(R,0)).
 
 
 
@@ -167,11 +167,8 @@ excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,nome_interdito,Ni
 excecao(adjudicataria(Id,Nome,Nif,Morada)) :- adjudicataria(Id,Nome,Nif,morada_interdita).
 
 +adjudicataria(Id,Nome,Nif,Morada) :: (solucoes(adjudicataria(Id,Nome,Nif,Morada),
-                                                         (adjudicataria(_,Nome,_,Morada), (nulointerdito(Nome);
-                                                                                            nulointerdito(Morada)
-                                                                                                         )),
-                                                          R),
-                                                        comprimento(R,0)).
+                                               (adjudicataria(_,Nome,_,Morada) , (nulointerdito(Nome) ; nulointerdito(Morada))),R),
+                                               comprimento(R,0)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

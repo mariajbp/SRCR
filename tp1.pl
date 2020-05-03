@@ -15,6 +15,7 @@
 :- dynamic idAdjudicata/1.
 :- dynamic excecao/1.
 :-dynamic data/3.
+:-dynamic (-)/1.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Carregar predicados do ficheiro no qual é guardado o estado
